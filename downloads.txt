@@ -1,0 +1,25 @@
+//INSTALLED
+redux
+react-redux
+@reduxjs/toolkit
+react-router-dom
+
+express
+express-session
+body-parser
+morgan
+cors
+bcrypt
+dotenv
+passport
+passport-local
+pg
+validator
+
+
+//NOT INSTALLED
+uuid
+helmet
+csurf //npmjs.com says this package is depreciated
+passport-google ???
+passport-facebook ???
