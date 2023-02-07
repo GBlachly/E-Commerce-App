@@ -19,7 +19,7 @@ export const ProductsPage = () => {
     useEffect(() => {
         fetch(`http://localhost:4001/products/`, {credentials: 'include'})
         .then(response => response.json())
-        .then(json => setProducts(json.products) )
+        .then(json => setProducts(json.data) )
         .catch(err => console.log(err))
     }, [setProducts]);
 

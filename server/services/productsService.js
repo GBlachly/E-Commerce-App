@@ -1,12 +1,14 @@
-const prodMod = require('../models/productsModel')
+const productsMod = require('../models/productsModel')
 
 
 const productService = {
     
     async getAll(req, res, next) {
         try {
-            const products = await prodMod.selectAll();
-            res.status(200).json({ products: products });
+            
+            const products = await productsMod.getAll();
+            res.status(200).json({ data: products });
+        
         } catch(err) {
             next(err);
         };
@@ -14,9 +16,11 @@ const productService = {
 
     async getById(req, res, next) {
         try {
+
             const id = Number(req.params.id);
-            const product = await prodMod.selectById(id);
-            res.status(200).json({ product: product });
+            const product = await productsMod.getById(id);
+            res.status(200).json({ data: product });
+        
         } catch(err) {
             next(err);
         };
