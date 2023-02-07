@@ -1,10 +1,10 @@
 import './ProductsPage.css';
-import React from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import { ProductItem } from '../../components/productItem/ProductItem';
 
 
 export const ProductsPage = () => {
-    const products = [
+    const [ products, setProducts ] = useState([
         {id: 1, name: 'Lamp', price: 11.99},
         {id: 2, name: 'Desk', price: 22.99},
         {id: 3, name: 'Chair', price: 33.99},
@@ -13,7 +13,15 @@ export const ProductsPage = () => {
         {id: 6, name: 'Mouse', price: 66.99},
         {id: 7, name: 'Headphones', price: 77.99},
         {id: 8, name: 'Speakers', price: 88.99}
-    ];
+    ]);
+
+    
+    useEffect(() => {
+        fetch(`http://localhost:4001/products/`, {credentials: 'include'})
+        .then(response => response.json())
+        .then(json => setProducts(json.products) )
+        .catch(err => console.log(err))
+    }, [setProducts]);
 
 
     return (
