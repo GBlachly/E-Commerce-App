@@ -7,10 +7,12 @@ const userMod = {
         try {
 
             const { username, password, email, admin } = data;
+            const userAdmin = admin || false; 
+
             const statement = `INSERT INTO users (username, email, password, admin)
                                 VALUES ($1, $2, $3, $4) 
                                 RETURNING *;`;
-            const values = [username, password, email, admin];
+            const values = [username, password, email, userAdmin];
             const result = await db.queryNoCB(statement, values);
         
             if (result.rows?.length) {
@@ -63,16 +65,60 @@ const userMod = {
         };
     },
 
-    //UPDATE
-    async update(data) {
+    //UPDATE 
+    async updateUsername(data) {
         try {
 
-            const { id, username, password, email, admin } = data;
+            const { id, username } = data;
             const statement = `ALTER TABLE users
-                                SET username = $2, password = $3, email = $4, admin = $5
+                                SET username = $2
                                 WHERE id = $1
                                 RETURNING *;`;
-            const values = [id, username, password, email, admin];
+            const values = [id, username];
+            const result = await db.queryNoCB(statement, values);
+
+            if (result.rows?.length) {
+                return result.rows[0];
+            };
+
+            return null;
+
+        } catch(err) {
+            throw new Error(err);
+        };
+    },
+
+    async updatePassword(data) {
+        try {
+
+            const { id, passwordHash } = data;
+            const statement = `ALTER TABLE users
+                                SET password = $2
+                                WHERE id = $1
+                                RETURNING *;`;
+            const values = [id, passwordHash];
+            const result = await db.queryNoCB(statement, values);
+
+            if (result.rows?.length) {
+                return result.rows[0];
+            };
+
+            return null;
+
+        } catch(err) {
+            throw new Error(err);
+        };
+    },
+
+    async updateEmail(data) {
+        try {
+
+            const { id, email } = data;
+            const statement = `ALTER TABLE users
+                                SET email = $2
+                                WHERE id = $1
+                                RETURNING *;`;
+            const values = [id, email];
             const result = await db.queryNoCB(statement, values);
 
             if (result.rows?.length) {

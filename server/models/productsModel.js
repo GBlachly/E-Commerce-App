@@ -66,7 +66,7 @@ const productsMod = {
         try {
 
             const statement = `SELECT * FROM products 
-                                WHERE name LIKE %$1%;`;
+                                WHERE name LIKE %$1%;`;     //this query statement has a syntax error currently
             const values = [input];
             const result = await db.queryNoCB(statement, values);
             

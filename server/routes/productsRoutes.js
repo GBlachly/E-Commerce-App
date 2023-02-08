@@ -1,20 +1,20 @@
 const express = require('express');
 const productsRouter = express.Router(); 
-const ps = require('../services/productsService');
+const productsService = require('../services/productsService');
 
 
-productsRouter.get('/', ps.getAll);
+productsRouter.get('/', productsService.getAll);     //add 'search' query to search products by name
 
-productsRouter.get('/id/:id', ps.getById);
+productsRouter.get('/id/:id', productsService.getById);
 
-productsRouter.get('/name/:name', );
+//productsRouter.get('/name/:name', );  //add 'search' query to top route instead of this
 
 //ADMIN ROUTES
-productsRouter.post('/', );
+productsRouter.post('/', productsService.create);
 
-productsRouter.put('/id/:id', );
+productsRouter.put('/id/:id', productsService.update);
 
-productsRouter.delete('/id/:id', );
+productsRouter.delete('/id/:id', productsService.delete);
 
 
 module.exports = productsRouter;
