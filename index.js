@@ -10,6 +10,10 @@ const session = require('express-session');
 const passport = require('passport');
 const localStrategy = require('./server/passport/localStrategy');
 
+const db = require('./server/db/db');
+//const userMod = require('./server/models/userModel'); 
+//TRY DESERIALIZING USING userMod.getById(id) AT SOME POINT (NEED TO ADD ASYNC/AWAIT???)
+
 const authRouter = require('./server/routes/authRoutes');
 const userRouter = require('./server/routes/userRoutes');
 const productsRouter = require('./server/routes/productsRoutes');
@@ -23,6 +27,7 @@ const PORT = process.env.SERVER_PORT;
 //MIDDLEWARE
 const corsOptions = {
     origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true
 };
 app.use(cors(corsOptions));
@@ -56,8 +61,14 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
     console.log(`Start Deserialize id: ${id}`);
-    //const user = user.findById(id);
-    done(null, user);
+
+    const statement = `SELECT * FROM users WHERE id = $1;`;
+    const values = [id];
+
+    db.query(statement, values, (err, user) => {
+        if (err) return done(err); 
+        done(null, user);
+    });
 });
 
 passport.use('local', localStrategy);
