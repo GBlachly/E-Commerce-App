@@ -9,13 +9,7 @@ const productsService = {
             const { name, price, stock } = req.body;
             const productStock = stock || 0;
 
-            const data = {
-                name: name,
-                price: price,
-                stock: productStock
-            };
-    
-            const product = await productsMod.create(data);
+            const product = await productsMod.create({ name, price, productStock });
             res.status(200).json({ data: product });
         
         } catch(err) {
@@ -62,14 +56,7 @@ const productsService = {
             const { name, price, stock } = req.body;
             const productStock = stock || 0;
 
-            const data = {
-                id: id,
-                name: name,
-                price: price,
-                stock: productStock
-            };
-
-            const product = await productsMod.update(data);
+            const product = await productsMod.update({ id, name, price, productStock });
             res.status(200).json({ data: product });
 
         } catch(err) {

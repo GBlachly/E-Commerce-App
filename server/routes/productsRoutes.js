@@ -5,9 +5,9 @@ const productsService = require('../services/productsService');
 
 productsRouter.get('/', productsService.getAll);     //add 'search' query to search products by name
 
-productsRouter.get('/id/:id', productsService.getById);
+//productsRouter.get('/name/:name', );  //add 'search' query to top route instead of this 
 
-//productsRouter.get('/name/:name', );  //add 'search' query to top route instead of this
+productsRouter.get('/id/:id', productsService.getById);
 
 //ADMIN ROUTES
 productsRouter.post('/', productsService.create);
