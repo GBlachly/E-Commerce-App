@@ -1,7 +1,7 @@
 const db = require('../db/db');
 
 
-const cartMod = {
+const cartsMod = {
     //CREATE
     async create(data) {
         try {
@@ -109,4 +109,4 @@ const cartMod = {
 };
 
 
-module.exports = cartMod;
+module.exports = cartsMod;

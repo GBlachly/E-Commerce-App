@@ -13,13 +13,7 @@ const userService = {
             const { username } = req.body;
             const updatedUser = await userMod.updateUsername({ id, username });
 
-            const userNoPass = {
-                id: updatedUser.id,
-                username: updatedUser.username,
-                email: updatedUser.email
-            };
-
-            res.status(200).json({ data: userNoPass });
+            res.status(200).json({ data: updatedUser });
 
         } catch(err) {
             next(err);
@@ -37,13 +31,7 @@ const userService = {
 
             const updatedUser = await userMod.updatePassword({ id, passwordHash });
 
-            const userNoPass = {
-                id: updatedUser.id,
-                username: updatedUser.username,
-                email: updatedUser.email
-            };
-
-            res.status(200).json({ data: userNoPass });
+            res.status(200).json({ data: updatedUser });
 
         } catch(err) {
             next(err);
@@ -57,13 +45,7 @@ const userService = {
             const { email } = req.body;
             const updatedUser = await userMod.updateEmail({ id, email });
 
-            const userNoPass = {
-                id: updatedUser.id,
-                username: updatedUser.username,
-                email: updatedUser.email
-            };
-
-            res.status(200).json({ data: userNoPass });
+            res.status(200).json({ data: updatedUser });
 
         } catch(err) {
             next(err);
@@ -75,9 +57,9 @@ const userService = {
         try {
     
             const { id } = req.user;
-
-            const user = await userMod.delete(id);
-            res.status(200).json({ data: user });
+            const deletedUser = await userMod.delete(id);
+            
+            res.status(200).json({ data: deletedUser });
 
             //req.logout() ???
         

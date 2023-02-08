@@ -1,17 +1,18 @@
 const express = require('express');
 const cartRouter = express.Router();
+const cartService = require('../services/cartService');
 
 
-cartRouter.get('/', );
+cartRouter.get('/', cartService.getByUserId);
 
-cartRouter.post('/', );
+cartRouter.get('/id/:id', cartService.getById);
+
+cartRouter.post('/', cartService.create);
 
 /* update user cart */
-cartRouter.post('/addItem', );
-cartRouter.delete('/deleteItem', );
-cartRouter.put('/updateQuantity', );
-
-cartRouter.delete('/', );
+cartRouter.post('/addItem', cartService.addItem);
+cartRouter.delete('/deleteItem', cartService.deleteItem);
+cartRouter.put('/updateQuantity', cartService.updateQuantity);
 
 cartRouter.post('/checkout', );
 

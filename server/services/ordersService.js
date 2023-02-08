@@ -53,7 +53,7 @@ const ordersService = {
         try {
     
             const id = Number(req.params.id);
-            const orderResult = await ordersMod.searchById(id);
+            const orderResult = await ordersMod.getById(id);
             const orderItemsResult = await orderItemsMod.getItemsByOrderId(id);
 
             const products = [];

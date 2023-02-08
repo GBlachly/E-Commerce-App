@@ -45,7 +45,7 @@ const cartItemsMod = {
     },
 
     //UPDATE
-    async update(data) {
+    async updateQuantity(data) {
         try {
 
             const { cartId, productId, quantity } = data;
