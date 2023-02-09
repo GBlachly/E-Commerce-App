@@ -6,13 +6,12 @@ const userMod = {
     async create(data) {
         try {
 
-            const { username, password, email, admin } = data;
-            const userAdmin = admin || false; 
+            const { username, passwordHash, email, userAdmin } = data;
 
-            const statement = `INSERT INTO users (username, email, password, admin)
+            const statement = `INSERT INTO users (username, password, email, admin)
                                 VALUES ($1, $2, $3, $4) 
                                 RETURNING *;`;
-            const values = [username, password, email, userAdmin];
+            const values = [username, passwordHash, email, userAdmin];
             const result = await db.queryNoCB(statement, values);
         
             if (result.rows?.length) {
