@@ -45,6 +45,7 @@ const authService = {
         try {
 
             if (req.user) {
+                console.log(` User: ${req.user.id} is logged in`)
                 const user = await userMod.getById(req.user.id);
                 res.status(200).json({ data: user });
                 return;
@@ -60,7 +61,7 @@ const authService = {
     logout(req, res, next) {
         try {
 
-            req.logout();
+            req.logout(err => {if (err) return next(err)});
 
             res.status(200).json({ message: 'User Logged Out', data: null /* {} ??? */});
 

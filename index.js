@@ -65,9 +65,9 @@ passport.deserializeUser((id, done) => {
     const statement = `SELECT * FROM users WHERE id = $1;`;
     const values = [id];
 
-    db.query(statement, values, (err, user) => {
+    db.query(statement, values, (err, result) => {
         if (err) return done(err); 
-        done(null, user);
+        done(null, result.rows[0]);
     });
 });
 
