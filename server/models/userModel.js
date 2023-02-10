@@ -8,6 +8,19 @@ const userMod = {
 
             const { username, passwordHash, email, userAdmin } = data;
 
+            const existingUsername = await this.getByUsername(username);
+            const existingEmail = await this.getByEmail(email);
+            
+            if ( existingUsername ) { 
+                const err = new Error('Username already exists');
+                throw err;
+            };
+
+            if ( existingEmail ) { 
+                const err = new Error('Email already exists');
+                throw err; 
+            };
+
             const statement = `INSERT INTO users (username, password, email, admin)
                                 VALUES ($1, $2, $3, $4) 
                                 RETURNING *;`;
@@ -51,6 +64,25 @@ const userMod = {
             const statement = `SELECT * FROM users 
                                 WHERE username = $1;`;
             const values = [username];
+            const result = await db.queryNoCB(statement, values);
+            
+            if (result.rows?.length) {
+                return result.rows[0];
+            };
+            
+            return null;
+
+        } catch(err) {
+            throw new Error(err);
+        };
+    },
+
+    async getByEmail(email) {
+        try {
+
+            const statement = `SELECT * FROM users 
+                                WHERE email = $1;`;
+            const values = [email];
             const result = await db.queryNoCB(statement, values);
             
             if (result.rows?.length) {
