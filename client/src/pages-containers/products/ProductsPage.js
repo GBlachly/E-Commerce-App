@@ -2,6 +2,8 @@ import './ProductsPage.css';
 import React, { useState, useEffect } from 'react'; 
 import { ProductItem } from '../../components/productItem/ProductItem';
 
+import productsApi from '../../api/productsApi';
+
 
 export const ProductsPage = () => {
     const [ products, setProducts ] = useState([
@@ -15,15 +17,11 @@ export const ProductsPage = () => {
         {id: 8, name: 'Speakers', price: 88.99}
     ]);
 
-    
     useEffect(() => {
-        fetch(`http://localhost:4001/products/`, {credentials: 'include'})
-        .then(response => response.json())
-        .then(json => setProducts(json.data) )
-        .catch(err => console.log(err))
-    }, [setProducts]);
+            productsApi.getAll().then(response => setProducts(response));
+    }, []);
 
-
+    
     return (
         <div className='col-12'>
 

@@ -141,8 +141,9 @@ const cartService = {
     async deleteItem(req, res, next) {
         try {
 
+            const productId = Number(req.params.productId);
             const { userId } = req.user;
-            const { productId } = req.body;
+            
             const cartResult = await cartsMod.getByUserId(userId);
 
             const data = {

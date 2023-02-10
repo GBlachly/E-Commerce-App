@@ -11,7 +11,7 @@ cartRouter.post('/', cartService.create);
 
 /* update user cart */
 cartRouter.post('/addItem', cartService.addItem);
-cartRouter.delete('/deleteItem', cartService.deleteItem);
+cartRouter.delete('/deleteItem/:productId', cartService.deleteItem);
 cartRouter.put('/updateQuantity', cartService.updateQuantity);
 
 cartRouter.post('/checkout', );

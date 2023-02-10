@@ -9,7 +9,7 @@ userRouter.put('/password', userService.updatePassword);
 
 userRouter.put('/email', userService.updateEmail);
 
-userRouter.delete('/delete', userService.delete);
+userRouter.delete('/', userService.delete);
 
 
 module.exports = userRouter;

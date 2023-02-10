@@ -10,6 +10,7 @@ import { AccountPage } from './pages-containers/account/AccountPage';
 import { OrdersPage } from './pages-containers/orders/OrdersPage';
 import { CartPage } from './pages-containers/cart/CartPage';
 import { CheckoutPage } from './pages-containers/checkout/CheckoutPage';
+import { AdminPage } from './pages-containers/admin/AdminPage';
 
 
 function App() {
@@ -34,6 +35,8 @@ function App() {
             <Route exact path='/orders' element={<OrdersPage />} />
             <Route exact path='/cart' element={<CartPage />} />
             <Route exact path='/checkout' element={<CheckoutPage />} />
+            
+            <Route exact path='/admin' element={<AdminPage />} />
           </Routes>
         </div>
 
