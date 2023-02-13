@@ -7,7 +7,7 @@ import ordersReducer from './orders/ordersSlice';
 import cartReducer from './cart/cartSlice';
 
 
-export default store = configureStore({
+export default configureStore({
     reducer: combineReducers({
         products: productsReducer,
         auth: authReducer,
