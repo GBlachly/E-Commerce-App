@@ -14,5 +14,5 @@ export default configureStore({
         user: userReducer,
         orders: ordersReducer,
         cart: cartReducer,
-    })
+    }),
 });

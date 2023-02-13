@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {} from './userActions';
 
 
 const options = {
     name: 'user',
-    intialState: {
+    initialState: {
         user: null,
         isLoading: true,
         hasError: false,
@@ -12,8 +13,12 @@ const options = {
     extraReducers: {}
 };
 
+
 const userSlice = createSlice(options);
 
+export const selectUser = (state) => state.user.user;
+export const selectIsLoading = (state) => state.user.isLoading;
+export const selectHasError = (state) => state.user.hasError;
 
 export default userSlice.reducer;
 
@@ -21,7 +26,7 @@ export default userSlice.reducer;
 
 /*  USER OBJECT
 
-    intialState: {
+    initialState: {
         user: {
             id: 0,
             username: '',

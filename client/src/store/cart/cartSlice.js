@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {} from './cartActions';
 
 
 const options = {
     name: 'cart',
-    intialState: {
+    initialState: {
         cart: null,
         isLoading: true,
         hasError: false,
@@ -12,8 +13,12 @@ const options = {
     extraReducers: {}
 };
 
+
 const cartSlice = createSlice(options);
 
+export const selectCart = (state) => state.cart.cart;
+export const selectIsLoading = (state) => state.cart.isLoading;
+export const selectHasError = (state) => state.cart.hasError;
 
 export default cartSlice.reducer;
 
@@ -21,7 +26,7 @@ export default cartSlice.reducer;
 
 /*  CART OBJECT
 
-    intialState: {
+    initialState: {
         cart: {
             id: 0,
             userId: 0,

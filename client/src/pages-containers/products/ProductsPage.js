@@ -1,26 +1,38 @@
 import './ProductsPage.css';
-import React, { useState, useEffect } from 'react'; 
-import { ProductItem } from '../../components/productItem/ProductItem';
+import React, { useEffect } from 'react'; 
+import { useSelector, useDispatch } from 'react-redux';
 
-import productsApi from '../../api/productsApi';
+import { selectIsLoading, selectHasError, selectProducts } from '../../store/products/productsSlice';
+import { loadAllProducts } from '../../store/products/productsActions';
+import { ProductItem } from '../../components/productItem/ProductItem';
 
 
 export const ProductsPage = () => {
-    const [ products, setProducts ] = useState([
-        {id: 1, name: 'Lamp', price: 11.99},
-        {id: 2, name: 'Desk', price: 22.99},
-        {id: 3, name: 'Chair', price: 33.99},
-        {id: 4, name: 'Table', price: 44.99},
-        {id: 5, name: 'Keyboard', price: 55.99},
-        {id: 6, name: 'Mouse', price: 66.99},
-        {id: 7, name: 'Headphones', price: 77.99},
-        {id: 8, name: 'Speakers', price: 88.99}
-    ]);
+    const isLoading = useSelector(selectIsLoading);
+    const hasError = useSelector(selectHasError);
+    const products = useSelector(selectProducts);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-            productsApi.getAll().then(response => setProducts(response));
-    }, []);
+        dispatch(loadAllProducts());
+    }, [dispatch]); 
+    
 
+    if (isLoading) {
+        return (
+            <div className='col-12'>
+                <h1>Loading...</h1>
+            </div>
+        )
+    };
+
+    if (hasError) {
+        return (
+            <div className='col-12'>
+                <h1>Error Occurred</h1>
+            </div>
+        )
+    };
     
     return (
         <div className='col-12'>
