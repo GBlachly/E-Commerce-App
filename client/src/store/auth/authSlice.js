@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser } from './authActions';
+import { registerUser, loginUser, logoutUser } from './authActions';
 
 
 const options = {
@@ -12,6 +12,25 @@ const options = {
     },
     reducers: {},
     extraReducers: {
+        //REGISTER ACTION STATES
+        [registerUser.pending]: (state, action) => {
+            state.loggedIn = false;
+            state.isLoading = true;
+            state.hasError = false;
+        },
+        [registerUser.fulfilled]: (state, action) => {
+            state.user = action.payload;
+            state.loggedIn = true;
+            state.isLoading = false;
+            state.hasError = false;
+        },
+        [registerUser.rejected]: (state, action) => {
+            state.loggedIn = false;
+            state.isLoading = false;
+            state.hasError = true;
+        },
+
+        //LOGIN ACTION STATES
         [loginUser.pending]: (state, action) => {
             state.loggedIn = false;
             state.isLoading = true;
@@ -28,7 +47,15 @@ const options = {
             state.isLoading = false;
             state.hasError = true;
         },
-    }
+
+        //LOGOUT ACTION STATES
+        [logoutUser.pending]: (state, action) => {},    //???
+        [logoutUser.fulfilled]: (state, action) => {
+            state.user = {};
+            state.loggedIn = false;
+        },
+        [logoutUser.rejected]: (state, action) => {},     //??? If logout fails at server,                                                    
+    },                                                    // do i still want to logout on the client ???
 };
 
 

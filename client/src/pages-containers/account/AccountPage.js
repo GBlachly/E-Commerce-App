@@ -1,14 +1,16 @@
 import './AccountPage.css';
 import React from 'react'; 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { selectUser, selectIsLoading, selectHasError } from '../../store/auth/authSlice';
+import { logoutUser } from '../../store/auth/authActions';
 
 
 export const AccountPage = () => {
     const isLoading = useSelector(selectIsLoading);
     const hasError = useSelector(selectHasError);
     const user = useSelector(selectUser); 
+    const dispatch = useDispatch();
 
 
     if (isLoading) {
@@ -41,6 +43,8 @@ export const AccountPage = () => {
 
                 <h2>User Email</h2>
                 <h3>{user.email ? user.email : 'User Email Here'}</h3>
+
+                <button onClick={() => dispatch(logoutUser())} >Logout</button>
             </div>
             
         </div>

@@ -1,8 +1,58 @@
 import './RegisterPage.css';
-import React from 'react'; 
+import React, { useState } from 'react'; 
+import { useSelector, useDispatch } from 'react-redux';
+
+import { selectLoggedIn } from '../../store/auth/authSlice';
+import { registerUser } from '../../store/auth/authActions';
 
 
 export const RegisterPage = () => {
+    const [usernameInput, setUsernameInput] = useState('');
+    const [passwordInput, setPasswordInput] = useState('');
+    const [emailInput, setEmailInput] = useState('');
+    const loggedIn = useSelector(selectLoggedIn);
+    const dispatch = useDispatch();
+
+
+    const handleUsernameChange = (event) => {
+        const input = event.target.value;
+        setUsernameInput(input);
+    };
+
+    const handleEmailChange = (event) => {
+        const input = event.target.value;
+        setEmailInput(input);
+    };
+
+    const handlePasswordChange = (event) => {
+        const input = event.target.value;
+        setPasswordInput(input);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const data = {
+            username: usernameInput,
+            email: emailInput,
+            password: passwordInput
+        };
+
+        dispatch(registerUser(data));
+        
+        setUsernameInput('');
+        setEmailInput('');
+        setPasswordInput('');
+    };
+
+
+    if (loggedIn) {
+        return (
+            <div className='col-12'>
+                <h1>User Already Logged In</h1>
+            </div>
+        )
+    };
 
     return (
         <div className='col-12'>
@@ -10,14 +60,15 @@ export const RegisterPage = () => {
             <h1>Register</h1>
             
             <div className='register'>
-                <form>
+                <form onSubmit={handleSubmit} >
                     <section>
                         <label for='usernameInput'>Username</label>
                         <input 
                             id='usernameInput'
                             name='username'
                             type='text'
-                            value='{}' 
+                            value={usernameInput}
+                            onChange={handleUsernameChange} 
                         />
                     </section> 
 
@@ -27,7 +78,9 @@ export const RegisterPage = () => {
                             id='emailInput' 
                             name='email' 
                             type='text' 
-                            value='{}' />
+                            value={emailInput}
+                            onChange={handleEmailChange} 
+                        />
                     </section>
 
                     <section>
@@ -36,7 +89,8 @@ export const RegisterPage = () => {
                             id='passwordInput'
                             name='password'
                             type='password'
-                            value='{}'    
+                            value={passwordInput}
+                            onChange={handlePasswordChange}    
                         />
                     </section>
 
