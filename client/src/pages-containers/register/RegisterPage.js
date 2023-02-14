@@ -1,5 +1,6 @@
 import './RegisterPage.css';
 import React, { useState } from 'react'; 
+import { Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectLoggedIn } from '../../store/auth/authSlice';
@@ -48,9 +49,7 @@ export const RegisterPage = () => {
 
     if (loggedIn) {
         return (
-            <div className='col-12'>
-                <h1>User Already Logged In</h1>
-            </div>
+            <Navigate to='/account' replace={true} />
         )
     };
 

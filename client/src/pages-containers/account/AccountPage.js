@@ -1,17 +1,25 @@
 import './AccountPage.css';
 import React from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
-import { selectUser, selectIsLoading, selectHasError } from '../../store/auth/authSlice';
+import { selectUser, selectLoggedIn, selectIsLoading, selectHasError } from '../../store/auth/authSlice';
 import { logoutUser } from '../../store/auth/authActions';
 
 
 export const AccountPage = () => {
+    const loggedIn = useSelector(selectLoggedIn)
     const isLoading = useSelector(selectIsLoading);
     const hasError = useSelector(selectHasError);
     const user = useSelector(selectUser); 
     const dispatch = useDispatch();
 
+
+    if (!loggedIn) {
+        return (
+            <Navigate to='/login' replace={true} />
+        )
+    };
 
     if (isLoading) {
         return (

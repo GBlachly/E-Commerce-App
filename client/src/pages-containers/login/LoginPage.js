@@ -1,13 +1,16 @@
 import './LoginPage.css';
 import React, { useState } from 'react'; 
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
+import { selectLoggedIn } from '../../store/auth/authSlice';
 import { loginUser } from '../../store/auth/authActions';
 
 
 export const LoginPage = () => {
     const [usernameInput, setUsernameInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
+    const loggedIn = useSelector(selectLoggedIn);
     const dispatch = useDispatch();
 
 
@@ -30,10 +33,16 @@ export const LoginPage = () => {
         };
 
         dispatch(loginUser(data));
-        //setUsernameInput('');
-        //setPasswordInput('');
+        setUsernameInput('');
+        setPasswordInput('');
     };
 
+
+    if (loggedIn) {
+        return (
+            <Navigate to='/account' replace={true} />
+        )
+    };
 
     return (
         <div className='col-12'>
