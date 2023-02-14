@@ -27,10 +27,12 @@ const options = {
     }
 };
 
-
 const productsSlice = createSlice(options);
 
+
+//EXPORTS
 export const selectProducts = (state) => state.products.products;
+
 export const selectIsLoading = (state) => state.products.isLoading;
 export const selectHasError = (state) => state.products.hasError;
 

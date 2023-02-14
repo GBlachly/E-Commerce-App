@@ -1,49 +1,41 @@
 import './RegisterPage.css';
-import React, { useState } from 'react'; 
+import React from 'react'; 
 import { Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectLoggedIn } from '../../store/auth/authSlice';
+import { 
+    selectRegisterUsername,
+    selectRegisterEmail,
+    selectRegisterPassword,
+    handleRegisterUsername, 
+    handleRegisterEmail,
+    handleRegisterPassword, 
+    clearRegisterInputs,    
+} from '../../store/user/userSlice';
+import { selectLoggedIn, selectHasError } from '../../store/auth/authSlice';
 import { registerUser } from '../../store/auth/authActions';
 
 
 export const RegisterPage = () => {
-    const [usernameInput, setUsernameInput] = useState('');
-    const [passwordInput, setPasswordInput] = useState('');
-    const [emailInput, setEmailInput] = useState('');
+    const registerUsername = useSelector(selectRegisterUsername);
+    const registerPassword = useSelector(selectRegisterPassword);
+    const registerEmail = useSelector(selectRegisterEmail);
+    const hasError = useSelector(selectHasError);
     const loggedIn = useSelector(selectLoggedIn);
     const dispatch = useDispatch();
 
-
-    const handleUsernameChange = (event) => {
-        const input = event.target.value;
-        setUsernameInput(input);
-    };
-
-    const handleEmailChange = (event) => {
-        const input = event.target.value;
-        setEmailInput(input);
-    };
-
-    const handlePasswordChange = (event) => {
-        const input = event.target.value;
-        setPasswordInput(input);
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
         const data = {
-            username: usernameInput,
-            email: emailInput,
-            password: passwordInput
+            username: registerUsername,
+            email: registerEmail,
+            password: registerPassword
         };
 
         dispatch(registerUser(data));
-        
-        setUsernameInput('');
-        setEmailInput('');
-        setPasswordInput('');
+        dispatch(clearRegisterInputs());
     };
 
 
@@ -57,6 +49,7 @@ export const RegisterPage = () => {
         <div className='col-12'>
 
             <h1>Register</h1>
+            {hasError && <h2>Username or Email Already Exists</h2>}
             
             <div className='register'>
                 <form onSubmit={handleSubmit} >
@@ -66,8 +59,8 @@ export const RegisterPage = () => {
                             id='usernameInput'
                             name='username'
                             type='text'
-                            value={usernameInput}
-                            onChange={handleUsernameChange} 
+                            value={registerUsername}
+                            onChange={ (e) => {dispatch(handleRegisterUsername(e.target.value))} } 
                         />
                     </section> 
 
@@ -77,8 +70,8 @@ export const RegisterPage = () => {
                             id='emailInput' 
                             name='email' 
                             type='text' 
-                            value={emailInput}
-                            onChange={handleEmailChange} 
+                            value={registerEmail}
+                            onChange={ (e) => {dispatch(handleRegisterEmail(e.target.value))} }
                         />
                     </section>
 
@@ -88,8 +81,8 @@ export const RegisterPage = () => {
                             id='passwordInput'
                             name='password'
                             type='password'
-                            value={passwordInput}
-                            onChange={handlePasswordChange}    
+                            value={registerPassword}
+                            onChange={ (e) => {dispatch(handleRegisterPassword(e.target.value))} }   
                         />
                     </section>
 

@@ -1,40 +1,36 @@
 import './LoginPage.css';
-import React, { useState } from 'react'; 
+import React from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
+import { 
+    selectLoginUsername, 
+    selectLoginPassword,
+    handleLoginUsername, 
+    handleLoginPassword, 
+    clearLoginInputs, 
+} from '../../store/user/userSlice';
 import { selectLoggedIn } from '../../store/auth/authSlice';
 import { loginUser } from '../../store/auth/authActions';
 
 
 export const LoginPage = () => {
-    const [usernameInput, setUsernameInput] = useState('');
-    const [passwordInput, setPasswordInput] = useState('');
+    const loginUsername = useSelector(selectLoginUsername);
+    const loginPassword = useSelector(selectLoginPassword);
     const loggedIn = useSelector(selectLoggedIn);
     const dispatch = useDispatch();
 
 
-    const handleUsernameChange = (event) => {
-        const input = event.target.value;
-        setUsernameInput(input);
-    };
-
-    const handlePasswordChange = (event) => {
-        const input = event.target.value;
-        setPasswordInput(input); 
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
         
         const data = {
-            username: usernameInput,
-            password: passwordInput
+            username: loginUsername,
+            password: loginPassword,
         };
 
         dispatch(loginUser(data));
-        setUsernameInput('');
-        setPasswordInput('');
+        dispatch(clearLoginInputs());
     };
 
 
@@ -57,8 +53,8 @@ export const LoginPage = () => {
                             id='usernameInput'
                             name='username'
                             type='text'
-                            value={usernameInput} 
-                            onChange={handleUsernameChange}
+                            value={loginUsername} 
+                            onChange={ (e) => {dispatch(handleLoginUsername(e.target.value))} } 
                         />
                     </section>
                     
@@ -68,8 +64,8 @@ export const LoginPage = () => {
                             id='passwordInput'
                             name='password'
                             type='password'
-                            value={passwordInput}
-                            onChange={handlePasswordChange}    
+                            value={loginPassword}
+                            onChange={ (e) => {dispatch(handleLoginPassword(e.target.value))} }    
                         />
                     </section>
                     

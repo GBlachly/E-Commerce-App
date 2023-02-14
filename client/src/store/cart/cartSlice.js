@@ -13,10 +13,12 @@ const options = {
     extraReducers: {}
 };
 
-
 const cartSlice = createSlice(options);
 
+
+//EXPORTS
 export const selectCart = (state) => state.cart.cart;
+
 export const selectIsLoading = (state) => state.cart.isLoading;
 export const selectHasError = (state) => state.cart.hasError;
 

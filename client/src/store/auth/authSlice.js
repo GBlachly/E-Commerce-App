@@ -19,10 +19,20 @@ const options = {
             state.hasError = false;
         },
         [registerUser.fulfilled]: (state, action) => {
+            
+            if (!action.payload) {
+                state.user = {};
+                state.loggedIn = false;
+                state.isLoading = false;
+                state.hasError = false;
+                return;
+            };
+
             state.user = action.payload;
             state.loggedIn = true;
             state.isLoading = false;
             state.hasError = false;
+            
         },
         [registerUser.rejected]: (state, action) => {
             state.loggedIn = false;
@@ -58,12 +68,14 @@ const options = {
     },                                                    // do i still want to logout on the client ???
 };
 
-
 const authSlice = createSlice(options);
 
+
+//EXPORTS
 export const selectUser = (state) => state.auth.user;
 export const selectIsAdmin = (state) => state.auth.user.admin;
 export const selectLoggedIn = (state) => state.auth.loggedIn;
+
 export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectHasError = (state) => state.auth.hasError;
 

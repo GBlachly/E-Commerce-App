@@ -27,10 +27,12 @@ const options = {
     }
 };
 
-
 const ordersSlice = createSlice(options);
 
+
+//EXPORTS
 export const selectOrders = (state) => state.orders.orders;
+
 export const selectIsLoading = (state) => state.orders.isLoading;
 export const selectHasError = (state) => state.orders.hasError;
 

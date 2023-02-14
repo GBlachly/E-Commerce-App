@@ -5,15 +5,24 @@ import authApi from "../../api/authApi";
 export const registerUser = createAsyncThunk(
     'auth/registerUser',
     async (data) => {
-        const response = await authApi.register(data);
-        return response;
+        const { username, password } = data;
+
+        const registerResponse = await authApi.register(data);
+
+        if (registerResponse) {
+            const loginResponse = await authApi.login({ username, password })
+            return loginResponse 
+        } else {
+            return null;
+        };
     }
 );
 
 export const loginUser = createAsyncThunk(
     'auth/loginUser',
     async (data) => {
-        const response = await authApi.login(data);
+        const {username, password} = data
+        const response = await authApi.login({username, password});
         return response;
     }
 );
