@@ -1,10 +1,57 @@
 import './OrdersPage.css';
-import React from 'react'; 
+import React, { useEffect } from 'react'; 
+import { useSelector, useDispatch } from 'react-redux';
+
+import { selectOrders, selectIsLoading, selectHasError } from '../../store/orders/ordersSlice';
+import { loadUserOrders } from '../../store/orders/ordersActions';
 import { Order } from '../../components/order/Order';
 
 
 export const OrdersPage = () => {
-    const orders = [
+    const isLoading = useSelector(selectIsLoading);
+    const hasError = useSelector(selectHasError);
+    const orders = useSelector(selectOrders);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadUserOrders());
+    }, [dispatch]); 
+    
+
+    if (isLoading) {
+        return (
+            <div className='col-12'>
+                <h1>Loading...</h1>
+            </div>
+        )
+    };
+
+    if (hasError) {
+        return (
+            <div className='col-12'>
+                <h1>Error Occurred</h1>
+            </div>
+        )
+    };
+
+    return (
+        <div className='col-12'>
+
+            <h1>Orders</h1>
+
+            <div className='orders'>
+                {orders.map((order, index) => {
+                    return (
+                        <Order order={order} index={index}/>
+                    )
+                })}
+            </div>
+
+        </div>
+    );
+};
+
+    /*const orders = [
         {
             id: 111, 
             userId: 1, 
@@ -32,22 +79,4 @@ export const OrdersPage = () => {
                 {productId: 6, productName: 'Mouse', quantity: 6}
             ]
         },
-    ];
-
-
-    return (
-        <div className='col-12'>
-
-            <h1>Orders</h1>
-
-            <div className='orders'>
-                {orders.map(order => {
-                    return (
-                        <Order order={order}/>
-                    )
-                })}
-            </div>
-
-        </div>
-    );
-};
+    ]; */

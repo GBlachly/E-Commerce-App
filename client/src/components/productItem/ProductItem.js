@@ -9,6 +9,7 @@ export const ProductItem = (props) => {
             <p>{props.product.id}</p>
             <p>{props.product.name}</p>
             <p>{props.product.price}</p>
+            <p>Index: {props.index}</p>
         </div>
     );
 };

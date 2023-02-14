@@ -47,7 +47,7 @@ const authApi = {
                 headers: headers,
             });
 
-            const json = result.json();
+            const json = await result.json();
             return json.data;
 
         } catch(err) {

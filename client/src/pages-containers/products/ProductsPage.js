@@ -40,9 +40,9 @@ export const ProductsPage = () => {
             <h1>Products</h1>
             
             <div className='products'>
-                {products.map(product => {
+                {products.map((product, index) => {
                     return (
-                        <ProductItem product={product}/>
+                        <ProductItem product={product} index={index}/>
                     )
                 })}
             </div>

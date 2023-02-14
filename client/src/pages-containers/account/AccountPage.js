@@ -1,9 +1,31 @@
 import './AccountPage.css';
 import React from 'react'; 
+import { useSelector } from 'react-redux';
+
+import { selectUser, selectIsLoading, selectHasError } from '../../store/auth/authSlice';
 
 
 export const AccountPage = () => {
-    const user = {};
+    const isLoading = useSelector(selectIsLoading);
+    const hasError = useSelector(selectHasError);
+    const user = useSelector(selectUser); 
+
+
+    if (isLoading) {
+        return (
+            <div className='col-12'>
+                <h1>Loading...</h1>
+            </div>
+        )
+    };
+
+    if (hasError) {
+        return (
+            <div className='col-12'>
+                <h1>Error Occurred</h1>
+            </div>
+        )
+    }; 
 
     return (
         <div className='col-12'>
@@ -24,5 +46,3 @@ export const AccountPage = () => {
         </div>
     )
 };
-
-

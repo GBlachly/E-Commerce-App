@@ -1,17 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {} from './authActions';
+import { loginUser } from './authActions';
 
 
 const options = {
     name: 'auth',
     initialState: {
-        user: null,
+        user: {},
         loggedIn: false,
         isLoading: true, 
         hasError: false,
     },
     reducers: {},
-    extraReducers: {}
+    extraReducers: {
+        [loginUser.pending]: (state, action) => {
+            state.loggedIn = false;
+            state.isLoading = true;
+            state.hasError = false;
+        },
+        [loginUser.fulfilled]: (state, action) => {
+            state.user = action.payload;
+            state.loggedIn = true;
+            state.isLoading = false;
+            state.hasError = false;
+        },
+        [loginUser.rejected]: (state, action) => {
+            state.loggedIn = false;
+            state.isLoading = false;
+            state.hasError = true;
+        },
+    }
 };
 
 

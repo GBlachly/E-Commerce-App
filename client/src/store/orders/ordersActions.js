@@ -4,8 +4,8 @@ import ordersApi from '../../api/ordersApi';
 
 export const loadUserOrders = createAsyncThunk(
     'orders/loadUserOrders',
-    async (userId = null) => {
-        const response = await ordersApi.getByUserId(userId);
+    async () => {
+        const response = await ordersApi.getByUserId();
         return response; 
     }
 );
