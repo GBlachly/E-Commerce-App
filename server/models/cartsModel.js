@@ -67,12 +67,12 @@ const cartsMod = {
     async update(data) {
         try {
 
-            const { id, totalPrice } = data;
+            const { userId, totalPrice } = data;
             const statement = `UPDATE carts
                                 SET total_price = $2
-                                WHERE id = $1
+                                WHERE user_id = $1
                                 RETURNING *;`;
-            const values = [id, totalPrice];
+            const values = [userId, totalPrice];
             const result = await db.queryNoCB(statement, values);
 
             if (result.rows?.length) {

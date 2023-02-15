@@ -56,13 +56,18 @@ const cartApi = {
         };
     },
 
-    async addItem(product) {        //product = {id: interger, name: string, quantitiy: integer}
+    async addItem(data) {        //product = {id: interger, name: string, quantitiy: integer}
         try {
+
+            const { totalPrice, product } = data
 
             const result = await fetch(`${root}addItem`, {
                 method: 'POST',
                 credentials: "include",
-                body: JSON.stringify({product}),
+                body: JSON.stringify({
+                    totalPrice: totalPrice,
+                    product: product,
+                }),
                 headers: headers,
             });
 
@@ -74,12 +79,19 @@ const cartApi = {
         };
     },
 
-    async deleteItem(productId) {
+    async deleteItem(data) {
         try {
 
-            const result = await fetch(`${root}deleteItem/${productId}`, {
-                method: 'DELETE',
-                credentials: 'include'
+            const { totalPrice, productId } = data;
+
+            const result = await fetch(`${root}deleteItem`, {
+                method: 'PUT',
+                credentials: 'include',
+                body: JSON.stringify({
+                    totalPrice,
+                    productId,
+                }),
+                headers: headers
             });
 
             const json = await result.json();
@@ -93,12 +105,13 @@ const cartApi = {
     async updateQuantity(data) {
         try {
 
-            const { productId, quantity } = data;
+            const { totalPrice, productId, quantity } = data;
 
             const result = await fetch(`${root}updateQuantity`, {
                 method: 'PUT',
                 credentials: 'include',
                 body: JSON.stringify({
+                    totalPrice,
                     productId,
                     quantity
                 }),

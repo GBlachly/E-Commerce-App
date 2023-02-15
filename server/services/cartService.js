@@ -48,7 +48,7 @@ const cartService = {
     async getByUserId(req, res, next) {
         try {
     
-            const { userId } = req.user;
+            const userId  = req.user.id;
             const cartResult = await cartsMod.getByUserId(userId);
             const cartItemsResult = await cartItemsMod.getItemsByCartId(cartResult.id);
 
@@ -105,9 +105,9 @@ const cartService = {
     async addItem(req, res, next) {
         try {
 
-            const { userId } = req.user;
-            const { product } = req.body;
-            const cartResult = await cartsMod.getByUserId(userId);
+            const userId = req.user.id;
+            const { totalPrice, product } = req.body;
+            const cartResult = await cartsMod.update({ userId, totalPrice });
 
             const data = {
                 cartId: cartResult.id,
@@ -141,10 +141,10 @@ const cartService = {
     async deleteItem(req, res, next) {
         try {
 
-            const productId = Number(req.params.productId);
-            const { userId } = req.user;
+            const { totalPrice, productId } = req.body;
+            const userId = req.user.id;
             
-            const cartResult = await cartsMod.getByUserId(userId);
+            const cartResult = await cartsMod.update({ userId, totalPrice });
 
             const data = {
                 cartId: cartResult.id,
@@ -178,9 +178,9 @@ const cartService = {
     async updateQuantity(req, res, next) {
         try {
 
-            const { userId } = req.user;
-            const { productId, quantity } = req.body;
-            const cartResult = await cartsMod.getByUserId(userId);
+            const userId = req.user.id;
+            const { totalPrice, productId, quantity } = req.body;
+            const cartResult = await cartsMod.update({ userId, totalPrice });
 
             const data = {
                 cartId: cartResult.id,

@@ -1,10 +1,16 @@
 import './CartPage.css';
-import React from 'react'; 
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+
+import { selectLoggedIn } from '../../store/auth/authSlice';
+import { selectCart, selectIsLoading, selectHasError } from '../../store/cart/cartSlice';
+import { loadUserCart } from '../../store/cart/cartActions';
 import { CartItem } from '../../components/cartItem/CartItem';
 
 
 export const CartPage = () => {
-    const cart = {
+    /*const cart = {
         id: 111, 
         userId: 1, 
         totalPrice: 199.99, 
@@ -12,8 +18,40 @@ export const CartPage = () => {
             {productId: 1, productName: 'Lamp', quantity: 1},
             {productId: 2, productName: 'Desk', quantity: 2}
         ]
+    };*/
+    const loggedIn = useSelector(selectLoggedIn);
+    const isLoading = useSelector(selectIsLoading);
+    const hasError = useSelector(selectHasError);
+    const cart = useSelector(selectCart);
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        dispatch(loadUserCart());
+    }, [dispatch]); 
+
+
+    if (!loggedIn) {
+        return (
+            <Navigate to='/login' replace={true} />
+        )
     };
 
+    if (isLoading) {
+        return (
+            <div className='col-12'>
+                <h1>Loading...</h1>
+            </div>
+        )
+    };
+
+    if (hasError) {
+        return (
+            <div className='col-12'>
+                <h1>Error Occurred</h1>
+            </div>
+        )
+    };
 
     return (
         <div className='col-12'>
@@ -21,9 +59,9 @@ export const CartPage = () => {
             <h1>Cart</h1>
 
             <div className='cart'>
-                <h2>Cart Id: {cart.id}</h2>
-                <h3>User Id: {cart.userId}</h3>
-                <h3>Total Price: {cart.totalPrice}</h3>
+                <h2>Cart Id: {cart.id ? cart.id : '000'}</h2>
+                <h3>User Id: {cart.userId ? cart.userId : '000'}</h3>
+                <h3>Total Price: {cart.totalPrice ? cart.totalPrice : '$00.00'}</h3>
             
                 <div className='cart-items'>
                     {cart.products.map(product => {
