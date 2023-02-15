@@ -28,6 +28,14 @@ export const CartPage = () => {
         )
     };
 
+    if (!cart) {
+        return (
+            <div className='col-12'>
+                <h1>Cart Empty</h1>
+            </div>
+        )
+    };
+
     if (isLoading) {
         return (
             <div className='col-12'>
@@ -50,9 +58,9 @@ export const CartPage = () => {
             <h1>Cart</h1>
 
             <div className='cart'>
-                <h2>Cart Id: {cart.id ? cart.id : '000'}</h2>
-                <h3>User Id: {cart.userId ? cart.userId : '000'}</h3>
-                <h3>Total Price: {cart.totalPrice ? cart.totalPrice : '$00.00'}</h3>
+                <h2>Cart Id: {cart.id}</h2>
+                <h3>User Id: {cart.userId}</h3>
+                <h3>Total Price: {cart.totalPrice}</h3>
             
                 <div className='cart-items'>
                     {cart.products.map(product => {

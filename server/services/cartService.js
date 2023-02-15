@@ -47,9 +47,15 @@ const cartService = {
     //GET
     async getByUserId(req, res, next) {
         try {
-    
+
             const userId  = req.user.id;
             const cartResult = await cartsMod.getByUserId(userId);
+
+            if (!cartResult) {
+                res.status(200).json({ data: null });
+                return;
+            };
+            
             const cartItemsResult = await cartItemsMod.getItemsByCartId(cartResult.id);
 
             const products = [];
@@ -66,8 +72,8 @@ const cartService = {
                 products: products
             };
 
-            res.status(200).json({ data: cart })
-        
+            res.status(200).json({ data: cart });
+
         } catch(err) {
             next(err);
         };
