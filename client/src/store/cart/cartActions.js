@@ -83,7 +83,7 @@ export const updateCartItemQuantity = createAsyncThunk(
 
 export const clearCartItems = createAsyncThunk(
     'cart/clearCartItems',
-    async (data) => {
+    async () => {
         
         /*const loggedIn = await authApi.loggedIn();
         if (!loggedIn) {
