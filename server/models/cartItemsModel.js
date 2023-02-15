@@ -49,7 +49,7 @@ const cartItemsMod = {
         try {
 
             const { cartId, productId, quantity } = data;
-            const statement = `ALTER TABLE carts_products
+            const statement = `UPDATE carts_products
                                 SET quantity = $3
                                 WHERE cart_id = $1 AND product_id = $2
                                 RETURNING *;`;

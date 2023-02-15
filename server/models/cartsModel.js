@@ -68,7 +68,7 @@ const cartsMod = {
         try {
 
             const { id, totalPrice } = data;
-            const statement = `ALTER TABLE carts
+            const statement = `UPDATE carts
                                 SET total_price = $2
                                 WHERE id = $1
                                 RETURNING *;`;

@@ -101,7 +101,7 @@ const userMod = {
         try {
 
             const { id, username } = data;
-            const statement = `ALTER TABLE users
+            const statement = `UPDATE users
                                 SET username = $2
                                 WHERE id = $1
                                 RETURNING *;`;
@@ -123,7 +123,7 @@ const userMod = {
         try {
 
             const { id, passwordHash } = data;
-            const statement = `ALTER TABLE users
+            const statement = `UPDATE users
                                 SET password = $2
                                 WHERE id = $1
                                 RETURNING *;`;
@@ -145,7 +145,7 @@ const userMod = {
         try {
 
             const { id, email } = data;
-            const statement = `ALTER TABLE users
+            const statement = `UPDATE users
                                 SET email = $2
                                 WHERE id = $1
                                 RETURNING *;`;

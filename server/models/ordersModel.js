@@ -68,7 +68,7 @@ const ordersMod = {
         try {
 
             const { id, totalPrice, shipStatus } = data;
-            const statement = `ALTER TABLE orders
+            const statement = `UPDATE orders
                                 SET total_price = $2, ship_status = $3
                                 WHERE id = $1
                                 RETURNING *;`;

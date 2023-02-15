@@ -86,7 +86,7 @@ const productsMod = {
         try {
 
             const { id, name, price, stock } = data
-            const statement = `ALTER TABLE products 
+            const statement = `UPDATE products
                                 SET name = $2, price = $3, stock = $4 
                                 WHERE id = $1
                                 RETURNING *;`;
