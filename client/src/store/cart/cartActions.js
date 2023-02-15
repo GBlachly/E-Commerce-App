@@ -3,8 +3,8 @@ import cartApi from '../../api/cartApi';
 import authApi from '../../api/authApi';
 
 
-export const createCart = createAsyncThunk(
-    'cart/createCart',
+export const createCart = createAsyncThunk(     //Do i want to create a cart when user registers
+    'cart/createCart',                          //or when they first add an item to their cart
     async (data) => {
         
         /*const loggedIn = await authApi.loggedIn();
@@ -77,6 +77,20 @@ export const updateCartItemQuantity = createAsyncThunk(
         const { totalPrice, productId, quantity } = data;
         
         const response = await cartApi.updateQuantity({ totalPrice, productId, quantity });
+        return response;
+    }
+);
+
+export const clearCartItems = createAsyncThunk(
+    'cart/clearCartItems',
+    async (data) => {
+        
+        /*const loggedIn = await authApi.loggedIn();
+        if (!loggedIn) {
+            return null;
+        }; */
+
+        const response = await cartApi.clearCart();
         return response;
     }
 );

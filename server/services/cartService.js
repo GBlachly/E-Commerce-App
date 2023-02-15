@@ -205,8 +205,32 @@ const cartService = {
                 products: products
             };
 
-            res.status(200).json({ data: cart })
+            res.status(200).json({ data: cart });
         
+        } catch(err) {
+            next(err);
+        };
+    },
+
+    async clearCart(req, res, next) {
+        try {
+
+            const userId = req.user.id;
+            const totalPrice = 0; 
+            const cartResult = await cartsMod.update({ userId, totalPrice });
+
+            const cartItemResult = await cartItemsMod.deleteAll(cartResult.id);
+
+            const cart = {
+                id: cartResult.id,
+                userId: cartResult.user_id,
+                totalPrice: cartResult.total_price,
+                products: []
+            };
+
+            res.status(200).json({ data: cart });
+
+
         } catch(err) {
             next(err);
         };

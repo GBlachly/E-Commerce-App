@@ -125,6 +125,22 @@ const cartApi = {
             throw new Error(err);
         };
     },
+
+    async clearCart() {
+        try{
+
+            const result = await fetch(`${root}clearCart`, {
+                method: 'DELETE',
+                credentials: 'include',
+            });
+
+            const json = await result.json();
+            return json.data;
+
+        } catch(err) {
+            throw new Error(err);
+        };
+    },
     
 };
 

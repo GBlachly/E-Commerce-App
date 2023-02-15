@@ -14,6 +14,9 @@ cartRouter.post('/addItem', cartService.addItem);
 cartRouter.put('/deleteItem', cartService.deleteItem);
 cartRouter.put('/updateQuantity', cartService.updateQuantity);
 
+cartRouter.delete('/clearCart', cartService.clearCart)
+
+
 cartRouter.post('/checkout', );
 
 

@@ -10,15 +10,6 @@ import { CartItem } from '../../components/cartItem/CartItem';
 
 
 export const CartPage = () => {
-    /*const cart = {
-        id: 111, 
-        userId: 1, 
-        totalPrice: 199.99, 
-        products: [
-            {productId: 1, productName: 'Lamp', quantity: 1},
-            {productId: 2, productName: 'Desk', quantity: 2}
-        ]
-    };*/
     const loggedIn = useSelector(selectLoggedIn);
     const isLoading = useSelector(selectIsLoading);
     const hasError = useSelector(selectHasError);
