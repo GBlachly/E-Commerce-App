@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const cartsMod = require('../models/cartsModel');
 const userMod = require('../models/userModel');
 
 
@@ -22,6 +23,7 @@ const authService = {
 
             const createdUser = await userMod.create(data);
             const user = await userMod.getById(createdUser.id);
+            const cart = await cartsMod.create(user.id);
 
             res.status(200).json({ data: user });
 

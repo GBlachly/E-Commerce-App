@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 
 import { selectLoggedIn } from '../../store/auth/authSlice';
 import { selectCart, selectIsLoading, selectHasError } from '../../store/cart/cartSlice';
-import { loadUserCart } from '../../store/cart/cartActions';
+import { loadUserCart, clearCartItems } from '../../store/cart/cartActions';
 import { CartItem } from '../../components/cartItem/CartItem';
 
 
@@ -61,6 +61,8 @@ export const CartPage = () => {
                 <h2>Cart Id: {cart.id}</h2>
                 <h3>User Id: {cart.userId}</h3>
                 <h3>Total Price: {cart.totalPrice}</h3>
+
+                <button onClick={ ()=>{dispatch(clearCartItems())}}>Clear Cart</button>
             
                 <div className='cart-items'>
                     {cart.products.map(product => {

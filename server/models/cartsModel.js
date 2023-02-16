@@ -3,14 +3,13 @@ const db = require('../db/db');
 
 const cartsMod = {
     //CREATE
-    async create(data) {
+    async create(userId) {
         try {
 
-            const { userId, totalPrice } = data;
-            const statement = `INSERT INTO carts (user_id, total_price)
-                                VALUES ($1, $2)
+            const statement = `INSERT INTO carts (user_id)
+                                VALUES ($1)
                                 RETURNING *;`;
-            const values = [userId, totalPrice];
+            const values = [userId];
             const result = await db.queryNoCB(statement, values);
         
             if (result.rows?.length) {
@@ -64,7 +63,7 @@ const cartsMod = {
     },
 
     //UPDATE
-    async update(data) {
+    /* async update(data) {
         try {
 
             const { userId, totalPrice } = data;
@@ -84,7 +83,7 @@ const cartsMod = {
         } catch(err) {
             throw new Error(err);
         };
-    },
+    }, */
 
     //DELETE
     async delete(id) {

@@ -5,16 +5,9 @@ import authApi from '../../api/authApi';
 
 export const createCart = createAsyncThunk(     //Do i want to create a cart when user registers
     'cart/createCart',                          //or when they first add an item to their cart
-    async (data) => {
+    async (products) => {
         
-        /*const loggedIn = await authApi.loggedIn();
-        if (!loggedIn) {
-            return null;
-        }; */
-
-        const { totalPrice, products } = data;
-
-        const response = await cartApi.create({ totalPrice, products });
+        const response = await cartApi.create(products);
         return response;
     }
 );
@@ -22,11 +15,6 @@ export const createCart = createAsyncThunk(     //Do i want to create a cart whe
 export const loadUserCart = createAsyncThunk(
     'cart/loadUserCart',
     async () => {
-        
-        /*const loggedIn = await authApi.loggedIn();
-        if (!loggedIn) {
-            return null;
-        }; */
 
         const response = await cartApi.getByUserId();
         return response;
@@ -37,30 +25,18 @@ export const addCartItem = createAsyncThunk(
     'cart/addCartItem',
     async (data) => {
         
-        /*const loggedIn = await authApi.loggedIn();
-        if (!loggedIn) {
-            return null;
-        }; */
-
-        const { totalPrice, product } = data;   /* product =  {id, name, quantity} */
+        const { id, name, price, quantity } = data;
         
-        const response = await cartApi.addItem({ totalPrice, product });
+        const response = await cartApi.addItem({ id, name, price, quantity });
         return response;
     }
 );
 
 export const deleteCartItem = createAsyncThunk(
     'cart/deleteCartItem',
-    async (data) => {
+    async (productId) => {
         
-        /*const loggedIn = await authApi.loggedIn();
-        if (!loggedIn) {
-            return null;
-        }; */
-
-        const { totalPrice, productId } = data;
-        
-        const response = await cartApi.deleteItem({ totalPrice, productId });
+        const response = await cartApi.deleteItem(productId);
         return response;
     }
 );
@@ -68,15 +44,10 @@ export const deleteCartItem = createAsyncThunk(
 export const updateCartItemQuantity = createAsyncThunk(
     'cart/updateCartItemQuantity',
     async (data) => {
-        
-        /*const loggedIn = await authApi.loggedIn();
-        if (!loggedIn) {
-            return null;
-        }; */
 
-        const { totalPrice, productId, quantity } = data;
+        const { productId, quantity } = data;
         
-        const response = await cartApi.updateQuantity({ totalPrice, productId, quantity });
+        const response = await cartApi.updateQuantity(productId, quantity);
         return response;
     }
 );
@@ -84,11 +55,6 @@ export const updateCartItemQuantity = createAsyncThunk(
 export const clearCartItems = createAsyncThunk(
     'cart/clearCartItems',
     async () => {
-        
-        /*const loggedIn = await authApi.loggedIn();
-        if (!loggedIn) {
-            return null;
-        }; */
 
         const response = await cartApi.clearCart();
         return response;

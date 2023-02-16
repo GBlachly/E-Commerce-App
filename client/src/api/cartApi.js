@@ -6,16 +6,13 @@ const headers = {
 
 const cartApi = {
 
-    async create(data) {
+    async create(products = []) {
         try {
-
-            const { totalPrice, products } = data;
 
             const result = await fetch(`${root}`, {
                 method: 'POST',
                 credentials: 'include',
-                body: JSON.stringify({
-                    totalPrice, 
+                body: JSON.stringify({ 
                     products,
                 }),
                 headers: headers,
@@ -56,17 +53,14 @@ const cartApi = {
         };
     },
 
-    async addItem(data) {        //product = {id: interger, name: string, quantitiy: integer}
+    async addItem(product) {        //product = {id: interger, name: string, price: money, quantitiy: integer}
         try {
-
-            const { totalPrice, product } = data
 
             const result = await fetch(`${root}addItem`, {
                 method: 'POST',
                 credentials: "include",
                 body: JSON.stringify({
-                    totalPrice: totalPrice,
-                    product: product,
+                    product,
                 }),
                 headers: headers,
             });
@@ -79,16 +73,13 @@ const cartApi = {
         };
     },
 
-    async deleteItem(data) {
+    async deleteItem(productId) {
         try {
-
-            const { totalPrice, productId } = data;
 
             const result = await fetch(`${root}deleteItem`, {
                 method: 'PUT',
                 credentials: 'include',
                 body: JSON.stringify({
-                    totalPrice,
                     productId,
                 }),
                 headers: headers
@@ -102,16 +93,13 @@ const cartApi = {
         };
     },
 
-    async updateQuantity(data) {
+    async updateQuantity(productId, quantity) {
         try {
-
-            const { totalPrice, productId, quantity } = data;
 
             const result = await fetch(`${root}updateQuantity`, {
                 method: 'PUT',
                 credentials: 'include',
                 body: JSON.stringify({
-                    totalPrice,
                     productId,
                     quantity
                 }),

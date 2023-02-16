@@ -8,9 +8,9 @@ const cartService = {
         try {
     
             const userId = req.user.id;
-            const { totalPrice, products } = req.body;
+            const { products } = req.body;
 
-            const cartResult = await cartsMod.create({ userId, totalPrice });
+            const cartResult = await cartsMod.create(userId);
 
             const addedProducts = [];
             products.forEach(async (product) => {
@@ -18,6 +18,7 @@ const cartService = {
                     cartId: cartResult.id,
                     productId: product.id,
                     productName: product.name,
+                    productPrice: product.price,
                     quantity: product.quantity
                 };
 
@@ -26,6 +27,7 @@ const cartService = {
                 addedProducts.push({
                     productId: cartItemsResult.product_id,
                     productName: cartItemsResult.product_name,
+                    productPrice: cartItemsResult.product_price,
                     quantity: cartItemsResult.quantity
                 });
             });
@@ -33,7 +35,6 @@ const cartService = {
             const cart = {
                 id: cartResult.id,
                 userId: cartResult.user_id,
-                totalPrice: cartResult.total_price,
                 products: addedProducts
             };
 
@@ -52,6 +53,7 @@ const cartService = {
             const cartResult = await cartsMod.getByUserId(userId);
 
             if (!cartResult) {
+                
                 res.status(200).json({ data: null });
                 return;
             };
@@ -62,13 +64,13 @@ const cartService = {
             cartItemsResult.forEach(item => products.push({
                 productId: item.product_id,
                 productName: item.product_name,
+                productPrice: item.product_price,
                 quantity: item.quantity
             }));
 
             const cart = {
                 id: cartResult.id,
                 userId: cartResult.user_id,
-                totalPrice: cartResult.total_price,
                 products: products
             };
 
@@ -90,13 +92,13 @@ const cartService = {
             cartItemsResult.forEach(item => products.push({
                 productId: item.product_id,
                 productName: item.product_name,
+                productPrice: item.product_price,
                 quantity: item.quantity
             }));
 
             const cart = {
                 id: cartResult.id,
                 userId: cartResult.user_id,
-                totalPrice: cartResult.total_price,
                 products: products
             };
 
@@ -112,28 +114,31 @@ const cartService = {
         try {
 
             const userId = req.user.id;
-            const { totalPrice, product } = req.body;
-            const cartResult = await cartsMod.update({ userId, totalPrice });
+            const { product } = req.body;
+            const cartResult = await cartsMod.getByUserId(userId);
 
             const data = {
                 cartId: cartResult.id,
                 productId: product.id,
                 productName: product.name,
+                productPrice: product.price,
                 quantity: product.quantity
             };
-            const cartItemsResult = await cartItemsMod.addItem(data);
+            const itemAddResult = await cartItemsMod.addItem(data);
 
+            const cartItemsResult = await cartItemsMod.getItemsByCartId(cartResult.id)
+ 
             const products = [];
             cartItemsResult.forEach(item => products.push({
                 productId: item.product_id,
                 productName: item.product_name,
+                productPrice: item.product_price,
                 quantity: item.quantity
             }));
 
             const cart = {
                 id: cartResult.id,
                 userId: cartResult.user_id,
-                totalPrice: cartResult.total_price,
                 products: products
             };
 
@@ -146,11 +151,11 @@ const cartService = {
 
     async deleteItem(req, res, next) {
         try {
-
-            const { totalPrice, productId } = req.body;
-            const userId = req.user.id;
             
-            const cartResult = await cartsMod.update({ userId, totalPrice });
+            const userId = req.user.id;
+            const { productId } = req.body;
+            
+            const cartResult = await cartsMod.getByUserId(userId);
 
             const data = {
                 cartId: cartResult.id,
@@ -164,13 +169,13 @@ const cartService = {
             cartItemsResult.forEach(item => products.push({
                 productId: item.product_id,
                 productName: item.product_name,
+                productPrice: item.product_price,
                 quantity: item.quantity
             }));
 
             const cart = {
                 id: cartResult.id,
                 userId: cartResult.user_id,
-                totalPrice: cartResult.total_price,
                 products: products
             };
 
@@ -185,8 +190,8 @@ const cartService = {
         try {
 
             const userId = req.user.id;
-            const { totalPrice, productId, quantity } = req.body;
-            const cartResult = await cartsMod.update({ userId, totalPrice });
+            const { productId, quantity } = req.body;
+            const cartResult = await cartsMod.getByUserId(userId);
 
             const data = {
                 cartId: cartResult.id,
@@ -201,13 +206,13 @@ const cartService = {
             cartItemsResult.forEach(item => products.push({
                 productId: item.product_id,
                 productName: item.product_name,
+                productPrice: item.product_price,
                 quantity: item.quantity
             }));
 
             const cart = {
                 id: cartResult.id,
                 userId: cartResult.user_id,
-                totalPrice: cartResult.total_price,
                 products: products
             };
 
@@ -222,15 +227,13 @@ const cartService = {
         try {
 
             const userId = req.user.id;
-            const totalPrice = 0; 
-            const cartResult = await cartsMod.update({ userId, totalPrice });
+            const cartResult = await cartsMod.getByUserId(userId);
 
             const cartItemResult = await cartItemsMod.deleteAll(cartResult.id);
 
             const cart = {
                 id: cartResult.id,
                 userId: cartResult.user_id,
-                totalPrice: cartResult.total_price,
                 products: []
             };
 
