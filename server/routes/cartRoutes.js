@@ -1,6 +1,7 @@
 const express = require('express');
 const cartRouter = express.Router();
 const cartService = require('../services/cartService');
+const checkoutService = require('../services/checkoutService');
 
 
 cartRouter.get('/', cartService.getByUserId);
@@ -17,7 +18,7 @@ cartRouter.put('/updateQuantity', cartService.updateQuantity);
 cartRouter.delete('/clearCart', cartService.clearCart)
 
 
-cartRouter.post('/checkout', );
+cartRouter.post('/checkout', checkoutService);
 
 
 module.exports = cartRouter;

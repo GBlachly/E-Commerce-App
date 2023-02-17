@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import cartApi from '../../api/cartApi';
-import authApi from '../../api/authApi';
+//import authApi from '../../api/authApi';
 
 
 export const createCart = createAsyncThunk(     //Do i want to create a cart when user registers
@@ -57,6 +57,15 @@ export const clearCartItems = createAsyncThunk(
     async () => {
 
         const response = await cartApi.clearCart();
+        return response;
+    }
+);
+
+export const checkout = createAsyncThunk(
+    'cart/checkout',
+    async (totalPrice) => {
+
+        const response = await cartApi.checkout(totalPrice);
         return response;
     }
 );

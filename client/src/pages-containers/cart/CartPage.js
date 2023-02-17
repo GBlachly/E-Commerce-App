@@ -28,7 +28,7 @@ export const CartPage = () => {
         )
     };
 
-    if (!cart) {
+    if (!cart || cart.products.length === 0) {
         return (
             <div className='col-12'>
                 <h1>Cart Empty</h1>

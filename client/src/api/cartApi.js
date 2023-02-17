@@ -129,6 +129,26 @@ const cartApi = {
             throw new Error(err);
         };
     },
+
+    async checkout(totalPrice) {
+        try {
+
+            const result = await fetch(`${root}checkout`, {
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify({
+                    totalPrice,
+                }),
+                headers: headers,
+            });
+
+            const json = result.json();
+            return json.data;
+
+        } catch(err) {
+            throw new Error(err);
+        };
+    },
     
 };
 

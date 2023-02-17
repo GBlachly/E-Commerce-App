@@ -6,6 +6,7 @@ import {
     deleteCartItem,
     updateCartItemQuantity,
     clearCartItems,
+    checkout,
 } from './cartActions';
 
 
@@ -104,6 +105,21 @@ const options = {
             state.hasError = false;
         },
         [clearCartItems.rejected]: (state, action) => {
+            state.isLoading = false;
+            state.hasError = true;
+        },
+
+        //CHECKOUT ACTION
+        [checkout.pending]: (state, action) => {
+            state.isLoading = true;
+            state.hasError = false;
+        },
+        [checkout.fulfilled]: (state, action) => {
+            state.cart = action.payload;
+            state.isLoading = false;
+            state.hasError = false;
+        },
+        [checkout.rejected]: (state, action) => {
             state.isLoading = false;
             state.hasError = true;
         },
