@@ -28,7 +28,8 @@ const productsMod = {
     async getAll() {
         try {
             
-            const statement = `SELECT * FROM products;`;
+            const statement = `SELECT * FROM products
+                                ORDER BY id ASC;`;
             const values = [];
             const result = await db.queryNoCB(statement, values);
             
@@ -82,7 +83,7 @@ const productsMod = {
     },
 
     //UPDATE
-    async update(data) {
+    async updateAllInfo(data) {
         try {
 
             const { id, name, price, stock } = data
@@ -97,6 +98,28 @@ const productsMod = {
                 return result.rows[0];
             };
         
+            return null;
+
+        } catch(err) {
+            throw new Error(err);
+        };
+    },
+
+    async updateStock(data) {
+        try {
+
+            const { id, quantity } = data;
+            const statement = `UPDATE products
+                                SET stock = stock - $2
+                                WHERE id = $1
+                                RETURNING *;`;
+            const values = [id, quantity];
+            const result = await db.queryNoCB(statement, values);
+
+            if (result.rows?.length) {
+                return result.rows[0];
+            };
+
             return null;
 
         } catch(err) {
