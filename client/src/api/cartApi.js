@@ -53,6 +53,26 @@ const cartApi = {
         };
     },
 
+    async replace(products) {
+        try {
+
+            const result = await fetch(`${root}replace`, {
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify({
+                    products,
+                }),
+                headers: headers
+            });
+
+            const json = await result.json();
+            return json.data;
+
+        } catch(err) {
+            throw new Error(err);
+        };
+    },
+
     async addItem(product) {        //product = {id: interger, name: string, price: money, quantitiy: integer}
         try {
 

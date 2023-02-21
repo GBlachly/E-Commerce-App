@@ -110,6 +110,54 @@ const cartService = {
     },
 
     //UPDATE ( POST/PUT/DELETE )
+    async replace(req, res, next) {
+        try {
+
+            const userId = req.user.id;
+            const { products } = req.body;
+
+            const cartResult = await cartsMod.getByUserId(userId);
+            const deletedCartItems = await cartItemsMod.deleteAll(cartResult.id);
+
+            products.forEach(async (product) => {
+                const data = {
+                    cartId: cartResult.id,
+                    productId: product.productId,
+                    productName: product.productName,
+                    productPrice: product.productPrice,
+                    quantity: product.quantity
+                };
+
+                const addedCartItem = await cartItemsMod.addItem(data);
+            });
+
+            const newCartItemsResult = await cartItemsMod.getItemsByCartId(cartResult.id);
+
+            const newProducts = [];
+            newCartItemsResult.forEach((item => {
+                const newProduct = {
+                    productId: item.product_id,
+                    productName: item.product_name,
+                    productPrice: item.product_price,
+                    quantity: item.quantity
+                };
+
+                newProducts.push(newProduct);
+            }));
+
+            const newCart = {
+                id: cartResult.id,
+                userId: cartResult.user_id,
+                products: newProducts
+            };
+
+            res.status(200).json({ data: newCart });
+
+        } catch(err) {
+            next(err);
+        };
+    },
+
     async addItem(req, res, next) {
         try {
 

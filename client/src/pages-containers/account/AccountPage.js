@@ -1,11 +1,12 @@
 import './AccountPage.css';
-import React from 'react'; 
+import React, { useState } from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { selectUser, selectLoggedIn, selectIsLoading, selectHasError } from '../../store/auth/authSlice';
 import { logoutUser } from '../../store/auth/authActions';
-import { logoutCart } from '../../store/cart/cartSlice';
+import { selectGuestCart, logoutCart } from '../../store/cart/cartSlice';
+import { ReplaceCartPrompt } from '../../components/replaceCartPrompt/replaceCartPrompt';
 
 
 export const AccountPage = () => {
@@ -13,8 +14,11 @@ export const AccountPage = () => {
     const isLoading = useSelector(selectIsLoading);
     const hasError = useSelector(selectHasError);
     const user = useSelector(selectUser); 
+    const guestCart = useSelector(selectGuestCart);
     const dispatch = useDispatch();
 
+    const [ showPrompt, setShowPrompt ] = useState(true);
+    
 
     if (!loggedIn) {
         return (
@@ -30,7 +34,7 @@ export const AccountPage = () => {
         )
     };
 
-    if (hasError.otherError) {
+    if (hasError.loginErr || hasError.registerErr) {
         return (
             <div className='col-12'>
                 <h1>Error Occurred</h1>
@@ -42,6 +46,8 @@ export const AccountPage = () => {
         <div className='col-12'>
             
             <h1>Account</h1>
+
+            { showPrompt && guestCart ? <ReplaceCartPrompt toggleShowPrompt={setShowPrompt}/> : null }
 
             <div className='account'>
                 <h2>User ID</h2>

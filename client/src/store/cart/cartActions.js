@@ -21,6 +21,15 @@ export const loadUserCart = createAsyncThunk(
     }
 );
 
+export const replaceCartItems = createAsyncThunk(
+    'cart/replaceCartItems',
+    async (products) => {
+
+        const response = await cartApi.replace(products);
+        return response;
+    }
+);
+
 export const addCartItem = createAsyncThunk(
     'cart/addCartItem',
     async (data) => {

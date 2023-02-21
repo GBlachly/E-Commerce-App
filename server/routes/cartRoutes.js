@@ -6,6 +6,9 @@ const checkoutService = require('../services/checkoutService');
 
 cartRouter.get('/', cartService.getByUserId);
 
+/* replace user cart if cart not empty before login */
+cartRouter.post('/replace', cartService.replace);
+
 cartRouter.get('/id/:id', cartService.getById);
 
 cartRouter.post('/', cartService.create);

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
     createCart,
     loadUserCart,
+    replaceCartItems,
     addCartItem,
     deleteCartItem,
     updateCartItemQuantity,
@@ -18,6 +19,7 @@ const options = {
         },
         isLoading: false,
         hasError: false,
+        guestCart: false,
     },
 
     reducers: {
@@ -25,6 +27,7 @@ const options = {
             const foundIndex = state.cart.products.findIndex(product => product.productId === action.payload.productId);
             if (foundIndex === -1) {
                 state.cart.products.push(action.payload);
+                state.guestCart = true;
             } else {
                 state.cart.products[foundIndex].quantity = action.payload.quantity;
             };
@@ -33,13 +36,20 @@ const options = {
         loggedOutItemDelete(state, action) {
             const foundIndex = state.cart.products.findIndex(product => product.productId === action.payload);
             state.cart.products.splice(foundIndex, 1);
+
+            if (!state.cart.products.length) {
+                state.guestCart = false;
+            } else {
+                state.guestCart = true;
+            };
         },
 
         logoutCart(state, action) {
             state.cart = {
                 products: [],
             };
-        }
+            state.guestCart = false;
+        },
     },
 
     extraReducers: {
@@ -52,6 +62,7 @@ const options = {
             state.cart = action.payload;
             state.isLoading = false;
             state.hasError = false;
+            state.guestCart = false;
         },
         [createCart.rejected]: (state, action) => {
             state.isLoading = false;
@@ -67,8 +78,25 @@ const options = {
             state.cart = action.payload;
             state.isLoading = false;
             state.hasError = false;
+            state.guestCart = false;
         },
         [loadUserCart.rejected]: (state, action) => {
+            state.isLoading = false;
+            state.hasError = true;
+        },
+
+        //REPLACE USER CART ITEMS AT LOGIN
+        [replaceCartItems.pending]: (state, action) => {
+            state.isLoading = true;
+            state.hasError = false;
+        },
+        [replaceCartItems.fulfilled]: (state, action) => {
+            state.cart = action.payload;
+            state.isLoading = false;
+            state.hasError = false;
+            state.guestCart = false;
+        },
+        [replaceCartItems.rejected]: (state, action) => {
             state.isLoading = false;
             state.hasError = true;
         },
@@ -82,6 +110,7 @@ const options = {
             state.cart = action.payload;
             state.isLoading = false;
             state.hasError = false;
+            state.guestCart = false;
         },
         [addCartItem.rejected]: (state, action) => {
             state.isLoading = false;
@@ -97,6 +126,7 @@ const options = {
             state.cart = action.payload;
             state.isLoading = false;
             state.hasError = false;
+            state.guestCart = false;
         },
         [deleteCartItem.rejected]: (state, action) => {
             state.isLoading = false;
@@ -112,6 +142,7 @@ const options = {
             state.cart = action.payload;
             state.isLoading = false;
             state.hasError = false;
+            state.guestCart = false;
         },
         [updateCartItemQuantity.rejected]: (state, action) => {
             state.isLoading = false;
@@ -127,6 +158,7 @@ const options = {
             state.cart = action.payload;
             state.isLoading = false;
             state.hasError = false;
+            state.guestCart = false;
         },
         [clearCartItems.rejected]: (state, action) => {
             state.isLoading = false;
@@ -142,6 +174,7 @@ const options = {
             state.cart = action.payload;
             state.isLoading = false;
             state.hasError = false;
+            state.guestCart = false;
         },
         [checkout.rejected]: (state, action) => {
             state.isLoading = false;
@@ -156,6 +189,7 @@ const cartSlice = createSlice(options);
 
 //EXPORTS
 export const selectCart = (state) => state.cart.cart;
+export const selectGuestCart = (state) => state.cart.guestCart;
 
 export const selectIsLoading = (state) => state.cart.isLoading;
 export const selectHasError = (state) => state.cart.hasError;
