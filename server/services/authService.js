@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const cartsMod = require('../models/cartsModel');
+const cartItemsMod = require('../models/cartItemsModel');
 const userMod = require('../models/userModel');
 
 
@@ -8,22 +9,38 @@ const authService = {
     async register(req, res, next) {
         try {
 
-            const { username, password, email, admin } = req.body;
+            const { username, password, email, admin, products } = req.body;
             const userAdmin = admin || false;
             
             const salt = await bcrypt.genSalt(10);
             const passwordHash = await bcrypt.hash(password, salt); 
 
-            const data = {
+            const userData = {
                 username: username,
                 passwordHash: passwordHash,
                 email: email,
                 userAdmin: userAdmin
             };
 
-            const createdUser = await userMod.create(data);
+            const createdUser = await userMod.create(userData);
             const user = await userMod.getById(createdUser.id);
+            
+
             const cart = await cartsMod.create(user.id);
+            if (products) {
+                products.forEach(async (product) => {
+                    const cartItemData = {
+                        cartId: cart.id,
+                        productId: product.productId, 
+                        productName: product.productName, 
+                        productPrice: product.productPrice, 
+                        quantity: product.quantity,
+                    };
+
+                    const cartItem = await cartItemsMod.addItem(cartItemData);
+                });
+            };
+
 
             res.status(200).json({ data: user });
 

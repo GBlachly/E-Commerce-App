@@ -4,6 +4,11 @@ const ordersMod = require('../models/ordersModel');
 const orderItemsMod = require('../models/orderItemsModel');
 
 
+//MUST ALSO ALTER THE STOCK OF THE PURCHASED PRODUCTS
+//HAVE TO CHECK THAT ENOUGH OF THE PRODUCT IS IN STOCK 
+//THE STOCK OF THE PRODUCT IS CURRENTLY ONLY CHECKED WHEN THE PRODUCT IS ADDED TO THE CART
+//IT IS VERY POSSIBLE FOR THE STOCK OF THE PRODUCT TO CHANGE FROM ADDING TO CART TO CHECKOUT
+
 const checkoutService = async (req, res, next) => {
     try {
 

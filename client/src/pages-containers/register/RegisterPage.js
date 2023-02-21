@@ -14,6 +14,7 @@ import {
 } from '../../store/user/userSlice';
 import { selectLoggedIn, selectHasError } from '../../store/auth/authSlice';
 import { registerUser } from '../../store/auth/authActions';
+import { selectCart } from '../../store/cart/cartSlice';
 
 
 export const RegisterPage = () => {
@@ -22,6 +23,7 @@ export const RegisterPage = () => {
     const registerEmail = useSelector(selectRegisterEmail);
     const hasError = useSelector(selectHasError);
     const loggedIn = useSelector(selectLoggedIn);
+    const cart = useSelector(selectCart); 
     const dispatch = useDispatch();
 
     
@@ -31,7 +33,8 @@ export const RegisterPage = () => {
         const data = {
             username: registerUsername,
             email: registerEmail,
-            password: registerPassword
+            password: registerPassword,
+            cartProducts: cart.products,
         };
 
         dispatch(registerUser(data));
@@ -49,7 +52,7 @@ export const RegisterPage = () => {
         <div className='col-12'>
 
             <h1>Register</h1>
-            {hasError && <h2>Username or Email Already Exists</h2>}
+            {hasError.registerErr && <h2>Username or Email Already Exists</h2>}
             
             <div className='register'>
                 <form onSubmit={handleSubmit} >

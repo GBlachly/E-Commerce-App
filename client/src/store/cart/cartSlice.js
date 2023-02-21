@@ -13,11 +13,35 @@ import {
 const options = {
     name: 'cart',
     initialState: {
-        cart: null,
-        isLoading: true,
+        cart: {
+            products: [],
+        },
+        isLoading: false,
         hasError: false,
     },
-    reducers: {},
+
+    reducers: {
+        loggedOutItemAdd(state, action) {
+            const foundIndex = state.cart.products.findIndex(product => product.productId === action.payload.productId);
+            if (foundIndex === -1) {
+                state.cart.products.push(action.payload);
+            } else {
+                state.cart.products[foundIndex].quantity = action.payload.quantity;
+            };
+        },
+
+        loggedOutItemDelete(state, action) {
+            const foundIndex = state.cart.products.findIndex(product => product.productId === action.payload);
+            state.cart.products.splice(foundIndex, 1);
+        },
+
+        logoutCart(state, action) {
+            state.cart = {
+                products: [],
+            };
+        }
+    },
+
     extraReducers: {
         //CREATE CART ACTION
         [createCart.pending]: (state, action) => {
@@ -135,6 +159,8 @@ export const selectCart = (state) => state.cart.cart;
 
 export const selectIsLoading = (state) => state.cart.isLoading;
 export const selectHasError = (state) => state.cart.hasError;
+
+export const { loggedOutItemAdd, loggedOutItemDelete, loggedOutClearCart, logoutCart } = cartSlice.actions
 
 export default cartSlice.reducer;
 

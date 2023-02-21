@@ -10,7 +10,7 @@ import {
     handleLoginPassword, 
     clearLoginInputs, 
 } from '../../store/user/userSlice';
-import { selectLoggedIn } from '../../store/auth/authSlice';
+import { selectLoggedIn, selectHasError } from '../../store/auth/authSlice';
 import { loginUser } from '../../store/auth/authActions';
 
 
@@ -18,12 +18,13 @@ export const LoginPage = () => {
     const loginUsername = useSelector(selectLoginUsername);
     const loginPassword = useSelector(selectLoginPassword);
     const loggedIn = useSelector(selectLoggedIn);
+    const hasError = useSelector(selectHasError);
     const dispatch = useDispatch();
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         const data = {
             username: loginUsername,
             password: loginPassword,
@@ -44,6 +45,7 @@ export const LoginPage = () => {
         <div className='col-12'>
 
             <h1>Login</h1>
+            {hasError.loginErr && <h2>Incorrect Username or Password</h2>}
 
             <div className='login'>
                 <form onSubmit={handleSubmit}> 

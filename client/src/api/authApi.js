@@ -9,9 +9,14 @@ const authApi = {
     async register(data) {
         try {
 
-            const { username, password, email, admin } = data;
+            const { username, password, email, admin, cartProducts } = data;
             const userAdmin = admin || false;
-
+            
+            let products = null;
+            if (cartProducts.length) {
+                products = cartProducts;
+            };
+            
             const result = await fetch(`${root}register`, {
                 method: 'POST',
                 credentials: 'include',
@@ -20,6 +25,7 @@ const authApi = {
                     password: password,
                     email: email,
                     admin: userAdmin,
+                    products: products,
                 }),
                 headers: headers,
             });
