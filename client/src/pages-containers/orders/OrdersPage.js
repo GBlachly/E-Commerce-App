@@ -4,15 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { selectLoggedIn } from '../../store/auth/authSlice';
-import { selectOrders, selectIsLoading, selectHasError } from '../../store/orders/ordersSlice';
+import { selectOrders, selectOrdersLoading, selectOrdersError } from '../../store/orders/ordersSlice';
 import { loadUserOrders } from '../../store/orders/ordersActions';
 import { Order } from '../../components/order/Order';
 
 
 export const OrdersPage = () => {
     const loggedIn = useSelector(selectLoggedIn);
-    const isLoading = useSelector(selectIsLoading);
-    const hasError = useSelector(selectHasError);
+    const isLoading = useSelector(selectOrdersLoading);
+    const hasError = useSelector(selectOrdersError);
     const orders = useSelector(selectOrders);
     const dispatch = useDispatch();
 

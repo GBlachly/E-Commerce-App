@@ -17,9 +17,9 @@ const options = {
         cart: {
             products: [],
         },
+        guestCart: false,
         isLoading: false,
         hasError: false,
-        guestCart: false,
     },
 
     reducers: {
@@ -64,9 +64,9 @@ const options = {
         },
         [createCart.fulfilled]: (state, action) => {
             state.cart = action.payload;
+            state.guestCart = false;
             state.isLoading = false;
             state.hasError = false;
-            state.guestCart = false;
         },
         [createCart.rejected]: (state, action) => {
             state.isLoading = false;
@@ -80,9 +80,9 @@ const options = {
         },
         [loadUserCart.fulfilled]: (state, action) => {
             state.cart = action.payload;
+            state.guestCart = false;
             state.isLoading = false;
             state.hasError = false;
-            state.guestCart = false;
         },
         [loadUserCart.rejected]: (state, action) => {
             state.isLoading = false;
@@ -96,9 +96,9 @@ const options = {
         },
         [replaceCartItems.fulfilled]: (state, action) => {
             state.cart = action.payload;
+            state.guestCart = false;
             state.isLoading = false;
             state.hasError = false;
-            state.guestCart = false;
         },
         [replaceCartItems.rejected]: (state, action) => {
             state.isLoading = false;
@@ -112,9 +112,9 @@ const options = {
         },
         [addCartItem.fulfilled]: (state, action) => {
             state.cart = action.payload;
+            state.guestCart = false;
             state.isLoading = false;
             state.hasError = false;
-            state.guestCart = false;
         },
         [addCartItem.rejected]: (state, action) => {
             state.isLoading = false;
@@ -128,9 +128,9 @@ const options = {
         },
         [deleteCartItem.fulfilled]: (state, action) => {
             state.cart = action.payload;
+            state.guestCart = false;
             state.isLoading = false;
             state.hasError = false;
-            state.guestCart = false;
         },
         [deleteCartItem.rejected]: (state, action) => {
             state.isLoading = false;
@@ -144,9 +144,9 @@ const options = {
         },
         [updateCartItemQuantity.fulfilled]: (state, action) => {
             state.cart = action.payload;
+            state.guestCart = false;
             state.isLoading = false;
             state.hasError = false;
-            state.guestCart = false;
         },
         [updateCartItemQuantity.rejected]: (state, action) => {
             state.isLoading = false;
@@ -160,9 +160,9 @@ const options = {
         },
         [clearCartItems.fulfilled]: (state, action) => {
             state.cart = action.payload;
+            state.guestCart = false;
             state.isLoading = false;
             state.hasError = false;
-            state.guestCart = false;
         },
         [clearCartItems.rejected]: (state, action) => {
             state.isLoading = false;
@@ -176,9 +176,9 @@ const options = {
         },
         [checkout.fulfilled]: (state, action) => {
             state.cart = action.payload;
+            state.guestCart = false;
             state.isLoading = false;
             state.hasError = false;
-            state.guestCart = false;
         },
         [checkout.rejected]: (state, action) => {
             state.isLoading = false;
@@ -195,8 +195,8 @@ const cartSlice = createSlice(options);
 export const selectCart = (state) => state.cart.cart;
 export const selectGuestCart = (state) => state.cart.guestCart;
 
-export const selectIsLoading = (state) => state.cart.isLoading;
-export const selectHasError = (state) => state.cart.hasError;
+export const selectCartLoading = (state) => state.cart.isLoading;
+export const selectCartError = (state) => state.cart.hasError;
 
 export const { 
     loggedOutItemAdd, 

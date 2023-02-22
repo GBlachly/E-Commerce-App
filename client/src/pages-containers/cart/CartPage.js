@@ -3,15 +3,15 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectLoggedIn } from '../../store/auth/authSlice';
-import { selectCart, selectIsLoading, selectHasError, logoutCart } from '../../store/cart/cartSlice';
+import { selectCart, selectCartLoading, selectCartError, logoutCart } from '../../store/cart/cartSlice';
 import { loadUserCart, clearCartItems } from '../../store/cart/cartActions';
 import { CartItem } from '../../components/cartItem/CartItem';
 
 
 export const CartPage = () => {
     const loggedIn = useSelector(selectLoggedIn);
-    const isLoading = useSelector(selectIsLoading);
-    const hasError = useSelector(selectHasError);
+    const isLoading = useSelector(selectCartLoading);
+    const hasError = useSelector(selectCartError);
     const cart = useSelector(selectCart);
     const dispatch = useDispatch();
 

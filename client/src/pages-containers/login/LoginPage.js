@@ -10,7 +10,7 @@ import {
     handleLoginPassword, 
     clearLoginInputs, 
 } from '../../store/user/userSlice';
-import { selectLoggedIn, selectHasError } from '../../store/auth/authSlice';
+import { selectLoggedIn, selectAuthError } from '../../store/auth/authSlice';
 import { loginUser } from '../../store/auth/authActions';
 
 
@@ -18,7 +18,7 @@ export const LoginPage = () => {
     const loginUsername = useSelector(selectLoginUsername);
     const loginPassword = useSelector(selectLoginPassword);
     const loggedIn = useSelector(selectLoggedIn);
-    const hasError = useSelector(selectHasError);
+    const hasError = useSelector(selectAuthError);
     const dispatch = useDispatch();
 
 

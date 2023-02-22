@@ -33,8 +33,8 @@ const productsSlice = createSlice(options);
 //EXPORTS
 export const selectProducts = (state) => state.products.products;
 
-export const selectIsLoading = (state) => state.products.isLoading;
-export const selectHasError = (state) => state.products.hasError;
+export const selectProductsLoading = (state) => state.products.isLoading;
+export const selectProductsError = (state) => state.products.hasError;
 
 export default productsSlice.reducer;
 

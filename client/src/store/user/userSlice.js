@@ -19,7 +19,7 @@ const options = {
             email: '',
             password: '',
         },
-        isLoading: true,
+        isLoading: false,
         hasError: false,
     },
     reducers: {
@@ -85,8 +85,8 @@ export const selectUpdateUsername = (state) => state.user.updateInputs.username;
 export const selectUpdateEmail = (state) => state.user.updateInputs.email;
 export const selectUpdatePassword = (state) => state.user.updateInputs.password;
 
-export const selectIsLoading = (state) => state.user.isLoading;
-export const selectHasError = (state) => state.user.hasError;
+export const selectUserLoading = (state) => state.user.isLoading;
+export const selectUserError = (state) => state.user.hasError;
 
 export const {
     handleRegisterUsername,

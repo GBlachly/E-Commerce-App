@@ -4,14 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { selectLoggedIn } from '../../store/auth/authSlice';
-import { selectCart, selectIsLoading, selectHasError } from '../../store/cart/cartSlice';
+import { selectCart, selectCartLoading, selectCartError } from '../../store/cart/cartSlice';
 import { checkout } from '../../store/cart/cartActions';
 
 
 export const CheckoutPage = () => {
     const loggedIn = useSelector(selectLoggedIn);
-    const isLoading = useSelector(selectIsLoading);
-    const hasError = useSelector(selectHasError);
+    const isLoading = useSelector(selectCartLoading);
+    const hasError = useSelector(selectCartError);
     const cart = useSelector(selectCart);
     const dispatch = useDispatch();
 

@@ -12,7 +12,7 @@ import {
     handleRegisterPassword, 
     clearRegisterInputs,    
 } from '../../store/user/userSlice';
-import { selectLoggedIn, selectHasError } from '../../store/auth/authSlice';
+import { selectLoggedIn, selectAuthError } from '../../store/auth/authSlice';
 import { registerUser } from '../../store/auth/authActions';
 import { selectCart, turnOffGuestCart } from '../../store/cart/cartSlice';
 
@@ -21,7 +21,7 @@ export const RegisterPage = () => {
     const registerUsername = useSelector(selectRegisterUsername);
     const registerPassword = useSelector(selectRegisterPassword);
     const registerEmail = useSelector(selectRegisterEmail);
-    const hasError = useSelector(selectHasError);
+    const hasError = useSelector(selectAuthError);
     const loggedIn = useSelector(selectLoggedIn);
     const cart = useSelector(selectCart); 
     const dispatch = useDispatch();

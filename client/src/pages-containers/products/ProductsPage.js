@@ -2,20 +2,27 @@ import './ProductsPage.css';
 import React, { useEffect } from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectIsLoading, selectHasError, selectProducts } from '../../store/products/productsSlice';
+import { selectLoggedIn } from '../../store/auth/authSlice';
+import { loadUserCart } from '../../store/cart/cartActions';
+import { selectProducts, selectProductsLoading, selectProductsError } from '../../store/products/productsSlice';
 import { loadAllProducts } from '../../store/products/productsActions';
 import { ProductItem } from '../../components/productItem/ProductItem';
 
 
 export const ProductsPage = () => {
-    const isLoading = useSelector(selectIsLoading);
-    const hasError = useSelector(selectHasError);
+    const loggedIn = useSelector(selectLoggedIn)
+    const isLoading = useSelector(selectProductsLoading);
+    const hasError = useSelector(selectProductsError);
     const products = useSelector(selectProducts);
     const dispatch = useDispatch();
 
     useEffect(() => {
+        if (loggedIn) {
+            dispatch(loadUserCart());
+        };
+
         dispatch(loadAllProducts());
-    }, [dispatch]); 
+    }, [loggedIn, dispatch]); 
     
 
     if (isLoading) {

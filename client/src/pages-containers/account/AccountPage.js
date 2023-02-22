@@ -4,17 +4,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import cartApi from '../../api/cartApi';
-import { selectUser, selectLoggedIn, selectHasError } from '../../store/auth/authSlice';
+import { selectUser, selectAuthError, selectLoggedIn } from '../../store/auth/authSlice';
 import { logoutUser } from '../../store/auth/authActions';
-import { selectCart, selectGuestCart, logoutCart, selectIsLoading } from '../../store/cart/cartSlice';
+import { selectCart, selectGuestCart, selectCartLoading, logoutCart } from '../../store/cart/cartSlice';
 import { loadUserCart, replaceCartItems } from '../../store/cart/cartActions';
 import { ReplaceCartPrompt } from '../../components/replaceCartPrompt/replaceCartPrompt';
 
 
 export const AccountPage = () => {
     const loggedIn = useSelector(selectLoggedIn)
-    const isLoading = useSelector(selectIsLoading);
-    const hasError = useSelector(selectHasError);
+    const cartLoading = useSelector(selectCartLoading);
+    const authError = useSelector(selectAuthError);
     const user = useSelector(selectUser); 
     const cart = useSelector(selectCart);
     const guestCart = useSelector(selectGuestCart);
@@ -62,7 +62,7 @@ export const AccountPage = () => {
         );
     };
 
-    if (isLoading) {
+    if (cartLoading) {
         return (
             <div className='col-12'>
                 <h1>Loading...</h1>
@@ -70,7 +70,7 @@ export const AccountPage = () => {
         );
     };
 
-    if (hasError.loginErr || hasError.registerErr) {    //SHOULD I USE AUTH ERR, OR CART ERR, OR BOTH???
+    if (authError.loginErr || authError.registerErr) {    //SHOULD I USE AUTH ERR, OR CART ERR, OR BOTH???
         return (
             <div className='col-12'>
                 <h1>Error Occurred</h1>
