@@ -14,7 +14,7 @@ import {
 } from '../../store/user/userSlice';
 import { selectLoggedIn, selectHasError } from '../../store/auth/authSlice';
 import { registerUser } from '../../store/auth/authActions';
-import { selectCart } from '../../store/cart/cartSlice';
+import { selectCart, turnOffGuestCart } from '../../store/cart/cartSlice';
 
 
 export const RegisterPage = () => {
@@ -37,6 +37,7 @@ export const RegisterPage = () => {
             cartProducts: cart.products,
         };
 
+        dispatch(turnOffGuestCart());
         dispatch(registerUser(data));
         dispatch(clearRegisterInputs());
     };

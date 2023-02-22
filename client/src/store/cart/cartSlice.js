@@ -50,6 +50,10 @@ const options = {
             };
             state.guestCart = false;
         },
+
+        turnOffGuestCart(state, action) {
+            state.guestCart = false;
+        },
     },
 
     extraReducers: {
@@ -194,7 +198,13 @@ export const selectGuestCart = (state) => state.cart.guestCart;
 export const selectIsLoading = (state) => state.cart.isLoading;
 export const selectHasError = (state) => state.cart.hasError;
 
-export const { loggedOutItemAdd, loggedOutItemDelete, loggedOutClearCart, logoutCart } = cartSlice.actions
+export const { 
+    loggedOutItemAdd, 
+    loggedOutItemDelete, 
+    loggedOutClearCart, 
+    logoutCart,
+    turnOffGuestCart
+ } = cartSlice.actions
 
 export default cartSlice.reducer;
 

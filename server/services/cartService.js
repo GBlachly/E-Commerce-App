@@ -119,18 +119,20 @@ const cartService = {
             const cartResult = await cartsMod.getByUserId(userId);
             const deletedCartItems = await cartItemsMod.deleteAll(cartResult.id);
 
-            products.forEach(async (product) => {
+
+            for (let i = 0; i < products.length; i++) {
                 const data = {
                     cartId: cartResult.id,
-                    productId: product.productId,
-                    productName: product.productName,
-                    productPrice: product.productPrice,
-                    quantity: product.quantity
+                    productId: products[i].productId,
+                    productName: products[i].productName,
+                    productPrice: products[i].productPrice,
+                    quantity: products[i].quantity
                 };
 
                 const addedCartItem = await cartItemsMod.addItem(data);
-            });
+            };
 
+            
             const newCartItemsResult = await cartItemsMod.getItemsByCartId(cartResult.id);
 
             const newProducts = [];
