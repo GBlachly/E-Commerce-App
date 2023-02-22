@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectLoggedIn } from '../../store/auth/authSlice';
+import { loadAllProducts } from '../../store/products/productsActions';
 import { selectCart, selectCartLoading, selectCartError, logoutCart } from '../../store/cart/cartSlice';
 import { loadUserCart, clearCartItems } from '../../store/cart/cartActions';
 import { CartItem } from '../../components/cartItem/CartItem';
@@ -19,6 +20,8 @@ export const CartPage = () => {
 
 
     useEffect(() => {
+        dispatch(loadAllProducts);
+        
         if (loggedIn) {
             dispatch(loadUserCart());
         };
