@@ -19,10 +19,18 @@ export const ProductPage = () => {
     const cart = useSelector(selectCart);
 
     const [ quantity, setQuantity ] = useState(0);
+    const [ notEnoughStock, setNotEnoughStock ] = useState(false);
     const dispatch = useDispatch();
 
 
     const handleClick = () => {
+        setNotEnoughStock(false);
+
+        if (quantity > product.stock) {
+            setNotEnoughStock(true);
+            setQuantity(0);
+            return;
+        };
 
         if (product.stock <= 0) {
             return;
@@ -81,6 +89,7 @@ export const ProductPage = () => {
                 <p>Index: {index}</p>
 
                 {product.stock <= 0 && <p>Out of Stock</p>}
+                {notEnoughStock && <p>Not Enough Stock</p>}
 
                 <input 
                     type='number'
@@ -88,7 +97,7 @@ export const ProductPage = () => {
                     max={product.stock}
                     name='quantity'
                     value={quantity}
-                    onChange={ (e)=>{setQuantity(e.target.value)} }
+                    onChange={ (e)=>{setQuantity(e.target.value/1)} }
                 />
 
                 <button onClick={handleClick} >Add to Cart</button>

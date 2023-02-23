@@ -15,7 +15,19 @@ export const CheckoutPage = () => {
     const cart = useSelector(selectCart);
     const dispatch = useDispatch();
 
-    const totalPrice = 199.99; 
+
+    //WILL AT TIMES HAVE A LOT OF DECIMAL PLACES, MUST STOP AT TWO
+    const totalPrice = () => {
+        const total = cart.products.map((product) => {
+            const currency = product.productPrice;
+            const number = Number(currency.replace(/[^0-9.-]+/g,""));
+
+            return number * product.quantity;
+        }).reduce((x, y) => x + y); 
+
+        return total;
+    };
+    //WILL AT TIMES HAVE A LOT OF DECIMAL PLACES, MUST STOP AT TWO
 
 
     if (!loggedIn) {
@@ -52,10 +64,10 @@ export const CheckoutPage = () => {
         <div className='col-12'>
 
             <h1>Checkout</h1>
-            <h2>Total Price: {totalPrice}</h2>
+            <h2>Total Price: {totalPrice()}</h2>
 
             <div className='checkout'>
-                <button onClick={ ()=>{dispatch(checkout(totalPrice))} }>Checkout!!!</button>
+                <button onClick={ ()=>{dispatch(checkout(totalPrice()))} }>Checkout!!!</button>
             </div>
 
         </div>

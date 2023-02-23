@@ -16,7 +16,19 @@ export const CartPage = () => {
     const cart = useSelector(selectCart);
     const dispatch = useDispatch();
 
-    const totalPrice = 199.99;
+
+    //WILL AT TIMES HAVE A LOT OF DECIMAL PLACES, MUST STOP AT TWO
+    const totalPrice = () => {
+        const total = cart.products.map((product) => {
+            const currency = product.productPrice;
+            const number = Number(currency.replace(/[^0-9.-]+/g,""));
+
+            return number * product.quantity;
+        }).reduce((x, y) => x + y); 
+
+        return total;
+    };
+    //WILL AT TIMES HAVE A LOT OF DECIMAL PLACES, MUST STOP AT TWO
 
 
     useEffect(() => {
@@ -71,7 +83,7 @@ export const CartPage = () => {
             <div className='cart'>
                 <h2>Cart Id: {cart.id && cart.id}</h2>
                 <h3>User Id: {cart.userId && cart.userId}</h3>
-                <h3>Total Price: {totalPrice}</h3>
+                <h3>Total Price: {totalPrice()}</h3>
 
                 <button onClick={handleCartClear}>Clear Cart</button>
             
