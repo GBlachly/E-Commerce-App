@@ -1,7 +1,7 @@
 import './CheckoutPage.css';
 import React from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 import { selectLoggedIn } from '../../store/auth/authSlice';
 import { selectCart, selectCartLoading, selectCartError } from '../../store/cart/cartSlice';
@@ -56,6 +56,7 @@ export const CheckoutPage = () => {
         return (
             <div className='col-12'>
                 <h1>Error Occurred</h1>
+                <Link to='/cart' >Return to Cart</Link>
             </div>
         )
     };

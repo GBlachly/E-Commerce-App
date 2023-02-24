@@ -13,6 +13,7 @@ export const CartItem = (props) => {
     const { product } = props;
     const products = useSelector(selectProducts);
     const index = products.findIndex(item => item.id === product.productId)
+    const stock = products[index].stock;
     const loggedIn = useSelector(selectLoggedIn);
     const dispatch = useDispatch();
 
@@ -34,6 +35,8 @@ export const CartItem = (props) => {
             <p>Product Name: {product.productName}</p>
             <p>Product Price: {product.productPrice}</p>
             <p>Quantity: {product.quantity}</p>
+
+            {product.quantity > stock ? <p className='text-danger'>Please Edit Quantity</p> : null}
 
             <Link to={`/products/${index}`}>More Details</Link>
             <br></br>
