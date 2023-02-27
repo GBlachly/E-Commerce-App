@@ -6,10 +6,10 @@ const productsService = {
     async create(req, res, next) {
         try {
     
-            const { name, price, stock } = req.body;
+            const { name, price, stock, url } = req.body;
             const productStock = stock || 0;
 
-            const product = await productsMod.create({ name, price, productStock });
+            const product = await productsMod.create({ name, price, productStock, url });
             res.status(200).json({ data: product });
         
         } catch(err) {
@@ -53,10 +53,10 @@ const productsService = {
         try {
 
             const id = Number(req.params.id);
-            const { name, price, stock } = req.body;
+            const { name, price, stock, url } = req.body;
             const productStock = stock || 0;
 
-            const product = await productsMod.update({ id, name, price, productStock });
+            const product = await productsMod.update({ id, name, price, productStock, url });
             res.status(200).json({ data: product });
 
         } catch(err) {

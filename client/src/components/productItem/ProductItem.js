@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 
 
 export const ProductItem = (props) => {
-    const { id, name, price } = props.product;
+    const { id, name, price, url } = props.product;
     const { index } = props;
 
     return (
         <div className='product-item'>
+            <img src={url} alt='product' style={{ maxWidth: 100, height: 'auto', }}/>
             <p>{id}</p>
             <p>{name}</p>
             <p>{price}</p>

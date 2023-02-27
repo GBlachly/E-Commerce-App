@@ -6,11 +6,11 @@ const productsMod = {
     async create(data) {
         try {
 
-            const { name, price, stock } = data;
-            const statement = `INSERT INTO products (name, price, stock)
-                                VALUES ($1, $2, $3)
+            const { name, price, stock, url } = data;
+            const statement = `INSERT INTO products (name, price, stock, url)
+                                VALUES ($1, $2, $3, $4)
                                 RETURNING *;`;
-            const values = [name, price, stock];
+            const values = [name, price, stock, url];
             const result = await db.queryNoCB(statement, values);
         
             if (result.rows?.length) {
@@ -86,12 +86,12 @@ const productsMod = {
     async updateAllInfo(data) {
         try {
 
-            const { id, name, price, stock } = data
+            const { id, name, price, stock, url } = data
             const statement = `UPDATE products
-                                SET name = $2, price = $3, stock = $4 
+                                SET name = $2, price = $3, stock = $4, url = $5 
                                 WHERE id = $1
                                 RETURNING *;`;
-            const values = [id, name, price, stock];
+            const values = [id, name, price, stock, url];
             const result = await db.queryNoCB(statement, values);
         
             if (result.rows?.length) {

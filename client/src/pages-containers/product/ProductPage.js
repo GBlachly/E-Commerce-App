@@ -83,6 +83,7 @@ export const ProductPage = () => {
             <h1>Product</h1>
 
             <div className='product'>
+                <img src={product.url} alt='product' style={{ maxWidth: 250, height: 'auto', }}/>
                 <p>{product.id}</p>
                 <p>{product.name}</p>
                 <p>{product.price}</p>
