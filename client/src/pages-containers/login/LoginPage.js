@@ -1,7 +1,7 @@
 import './LoginPage.css';
 import React from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 import { 
     selectLoginUsername, 
@@ -45,14 +45,18 @@ export const LoginPage = () => {
         <div className='col-12'>
 
             <h1>Login</h1>
-            {hasError.loginErr && <h2>Incorrect Username or Password</h2>}
-
-            <div className='login'>
+            {hasError.loginErr && <h3>Incorrect Username or Password</h3>}
+        
+            <div className='login col-11 col-md-4 mx-auto py-3 rounded'>
                 <form onSubmit={handleSubmit}> 
                     <section>
-                        <label for='usernameInput'>Username</label>
+                        <label 
+                            for='usernameInput' 
+                            className='w-25'
+                        >Username</label>
                         <input 
                             id='usernameInput'
+                            className='w-50'
                             name='username'
                             type='text'
                             value={loginUsername} 
@@ -61,9 +65,13 @@ export const LoginPage = () => {
                     </section>
                     
                     <section>
-                        <label for='passwordInput'>Password</label>
+                        <label 
+                            for='passwordInput'
+                            className='w-25'
+                        >Password</label>
                         <input 
                             id='passwordInput'
+                            className='w-50'
                             name='password'
                             type='password'
                             value={loginPassword}
@@ -71,9 +79,11 @@ export const LoginPage = () => {
                         />
                     </section>
                     
-                    <button type='submit'>Submit</button>
+                    <button type='submit' className='btn btn-danger mt-1'>Submit</button>
                 </form>
             </div>
+
+            <h4>Click <Link to='/register'>Here</Link> to Sign up</h4>
 
         </div>
     );

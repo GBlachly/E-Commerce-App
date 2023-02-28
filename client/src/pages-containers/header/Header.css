@@ -1,4 +1,12 @@
-.header li {
-    display: inline-flex;
-    margin: 0 10px;
+.header {
+    background-color: var(--secondary-color);
+    border-bottom: 2px solid gray;
+}
+
+.nav-link {
+    color: var(--tertiary-color);
+}
+
+.nav-link:hover {
+    color: white;
 }

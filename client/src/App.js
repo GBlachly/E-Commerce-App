@@ -22,7 +22,7 @@ function App() {
           <Header />
         </div>
         
-        <div className='row'>
+        <div className='row mt-4'>
           <Routes>
             <Route exact path='/' element={<HomePage />} />
             

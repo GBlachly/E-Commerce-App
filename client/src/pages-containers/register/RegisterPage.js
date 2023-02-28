@@ -1,6 +1,6 @@
 import './RegisterPage.css';
 import React from 'react'; 
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { 
@@ -53,14 +53,18 @@ export const RegisterPage = () => {
         <div className='col-12'>
 
             <h1>Register</h1>
-            {hasError.registerErr && <h2>Username or Email Already Exists</h2>}
+            {hasError.registerErr && <h3>Username or Email Already Exists</h3>}
             
-            <div className='register'>
+            <div className='register col-11 col-md-4 mx-auto py-3 rounded'>
                 <form onSubmit={handleSubmit} >
                     <section>
-                        <label for='usernameInput'>Username</label>
+                        <label 
+                            for='usernameInput'
+                            className='w-25'
+                        >Username</label>
                         <input 
                             id='usernameInput'
+                            className='w-50'
                             name='username'
                             type='text'
                             value={registerUsername}
@@ -69,9 +73,13 @@ export const RegisterPage = () => {
                     </section> 
 
                     <section>
-                        <label for='emailInput'>Email</label>
+                        <label 
+                            for='emailInput'
+                            className='w-25'
+                        >Email</label>
                         <input 
                             id='emailInput' 
+                            className='w-50'
                             name='email' 
                             type='text' 
                             value={registerEmail}
@@ -80,9 +88,13 @@ export const RegisterPage = () => {
                     </section>
 
                     <section>
-                        <label for='passwordInput'>Password</label>
+                        <label 
+                            for='passwordInput'
+                            className='w-25'
+                        >Password</label>
                         <input 
                             id='passwordInput'
+                            className='w-50'
                             name='password'
                             type='password'
                             value={registerPassword}
@@ -90,9 +102,11 @@ export const RegisterPage = () => {
                         />
                     </section>
 
-                    <button type='submit'>Submit</button>
+                    <button type='submit' className='btn btn-danger mt-1'>Submit</button>
                 </form>
             </div>
+
+            <h4>Click <Link to='/login'>Here</Link> to Login</h4>
 
         </div>
     );
