@@ -15,7 +15,7 @@ import { AdminPage } from './pages-containers/admin/AdminPage';
 
 function App() {
   return (
-    <div className="app container-fluid">
+    <div className="app container-fluid text-center">
       <Router>
 
         <div className='row'>

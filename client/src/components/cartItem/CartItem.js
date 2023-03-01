@@ -30,8 +30,13 @@ export const CartItem = (props) => {
 
     
     return (
-        <div className='cart-item'>
-            <img src={product.productUrl} alt='product' style={{ width: 100, height: 'auto', }}/>
+        <div className='col-3 mx-auto border border-dark'>
+
+            <img 
+                src={product.productUrl} 
+                alt='product' 
+                className='w-50 h-auto'
+            />
             <p>Product Id: {product.productId}</p>
             <p>Product Name: {product.productName}</p>
             <p>Product Price: {product.productPrice}</p>
@@ -40,8 +45,11 @@ export const CartItem = (props) => {
             {product.quantity > stock ? <p className='text-danger'>Please Edit Quantity</p> : null}
 
             <Link to={`/products/${index}`}>More Details</Link>
-            <br></br>
-            <button onClick={handleDelete}>Delete</button>
+            <button 
+                className='d-block mx-auto btn btn-secondary'
+                onClick={handleDelete}
+            >Delete</button>
+
         </div>
     );
 };
