@@ -28,6 +28,8 @@ const ordersService = {
                 orderItemsResult.forEach(item => products.push({
                     productId: item.product_id, 
                     productName: item.product_name,
+                    productPrice: item.product_price,
+                    productUrl: item.product_url,
                     quantity: item.quantity})
                 );
 
@@ -60,6 +62,8 @@ const ordersService = {
             orderItemsResult.forEach(item => products.push({
                 productId: item.product_id,
                 productName: item.product_name,
+                productPrice: item.product_price,
+                productUrl: item.product_url,
                 quantity: item.quantity
             }));
 
@@ -88,11 +92,17 @@ const ordersService = {
             
             const updatedProducts = [];
             products.forEach(async (product) => {
-                const updatedProduct = await orderItemsMod.update(product);
+                const updatedProduct = await orderItemsMod.update({
+                    orderId: orderResult.id,
+                    productId: product.id,
+                    quantity: product.quantity,
+                });
 
                 const updatedProductObj = {
                     productId: updatedProduct.product_id,
                     productName: updatedProduct.product_name,
+                    productPrice: updatedProduct.product_price,
+                    productUrl: updatedProduct.product_url,
                     quantity: updatedProduct.quantity
                 };
 
@@ -126,6 +136,8 @@ const ordersService = {
             orderItemsResult.forEach(item => deletedProducts.push({
                 productId: item.product_id,
                 productName: item.product_name,
+                productPrice: item.product_price,
+                productUrl: item.product_url,
                 quantity: item.quantity
             }));
 

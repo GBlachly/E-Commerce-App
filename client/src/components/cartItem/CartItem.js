@@ -31,6 +31,7 @@ export const CartItem = (props) => {
     
     return (
         <div className='cart-item'>
+            <img src={product.productUrl} alt='product' style={{ width: 100, height: 'auto', }}/>
             <p>Product Id: {product.productId}</p>
             <p>Product Name: {product.productName}</p>
             <p>Product Price: {product.productPrice}</p>

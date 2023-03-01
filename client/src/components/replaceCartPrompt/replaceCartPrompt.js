@@ -9,8 +9,8 @@ export const ReplaceCartPrompt = (props) => {
         <div className='col-12'>
             <div className='replace-cart-prompt' >
                 <p>Do You Want to Replace Your Previous Cart With Your New One?</p>
-                <button onClick={handleCartReplace} >YES</button>
-                <button onClick={handleCartLoad}>NO</button>
+                <button onClick={handleCartReplace} className='mr-1 btn btn-secondary'>YES</button>
+                <button onClick={handleCartLoad} className='m1-1 btn btn-secondary'>NO</button>
             </div>
         </div>
     );

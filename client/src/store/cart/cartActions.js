@@ -34,9 +34,9 @@ export const addCartItem = createAsyncThunk(
     'cart/addCartItem',
     async (data) => {
         
-        const { id, name, price, quantity } = data;
+        const { id, name, price, url, quantity } = data;
         
-        const response = await cartApi.addItem({ id, name, price, quantity });
+        const response = await cartApi.addItem({ id, name, price, url, quantity });
         return response;
     }
 );

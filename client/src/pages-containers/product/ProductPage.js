@@ -45,6 +45,7 @@ export const ProductPage = () => {
                 productId: product.id,
                 productName: product.name,
                 productPrice: product.price,
+                productUrl: product.url,
                 quantity: quantity
             };
 
@@ -59,6 +60,7 @@ export const ProductPage = () => {
                     id: product.id,
                     name: product.name,
                     price: product.price,
+                    url: product.url,
                     quantity: quantity
                 };
     

@@ -19,6 +19,7 @@ const cartService = {
                     productId: product.id,
                     productName: product.name,
                     productPrice: product.price,
+                    productUrl: product.url,
                     quantity: product.quantity
                 };
 
@@ -28,6 +29,7 @@ const cartService = {
                     productId: cartItemsResult.product_id,
                     productName: cartItemsResult.product_name,
                     productPrice: cartItemsResult.product_price,
+                    productUrl: cartItemsResult.product_url,
                     quantity: cartItemsResult.quantity
                 });
             });
@@ -65,6 +67,7 @@ const cartService = {
                 productId: item.product_id,
                 productName: item.product_name,
                 productPrice: item.product_price,
+                productUrl: item.product_url,
                 quantity: item.quantity
             }));
 
@@ -93,6 +96,7 @@ const cartService = {
                 productId: item.product_id,
                 productName: item.product_name,
                 productPrice: item.product_price,
+                productUrl: item.product_url,
                 quantity: item.quantity
             }));
 
@@ -126,6 +130,7 @@ const cartService = {
                     productId: products[i].productId,
                     productName: products[i].productName,
                     productPrice: products[i].productPrice,
+                    productUrl: products[i].productUrl,
                     quantity: products[i].quantity
                 };
 
@@ -141,6 +146,7 @@ const cartService = {
                     productId: item.product_id,
                     productName: item.product_name,
                     productPrice: item.product_price,
+                    productUrl: item.product_url,
                     quantity: item.quantity
                 };
 
@@ -172,6 +178,7 @@ const cartService = {
                 productId: product.id,
                 productName: product.name,
                 productPrice: product.price,
+                productUrl: product.url,
                 quantity: product.quantity
             };
             const itemAddResult = await cartItemsMod.addItem(data);
@@ -183,6 +190,7 @@ const cartService = {
                 productId: item.product_id,
                 productName: item.product_name,
                 productPrice: item.product_price,
+                productUrl: item.product_url,
                 quantity: item.quantity
             }));
 
@@ -220,6 +228,7 @@ const cartService = {
                 productId: item.product_id,
                 productName: item.product_name,
                 productPrice: item.product_price,
+                productUrl: item.product_url,
                 quantity: item.quantity
             }));
 
@@ -257,6 +266,7 @@ const cartService = {
                 productId: item.product_id,
                 productName: item.product_name,
                 productPrice: item.product_price,
+                productUrl: item.product_url,
                 quantity: item.quantity
             }));
 

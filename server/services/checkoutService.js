@@ -51,6 +51,7 @@ const checkoutService = async (req, res, next) => {
                 productId: item.product_id,
                 productName: item.product_name,
                 productPrice: item.product_price,
+                productUrl: item.product_url,
                 quantity: item.quantity,
             };
 
@@ -61,6 +62,7 @@ const checkoutService = async (req, res, next) => {
                 productId: addedItem.product_id,
                 productName: addedItem.product_name,
                 productPrice: addedItem.product_price,
+                productUrl: addedItem.product_url,
                 quantity: addedItem.quantity,
             };
 

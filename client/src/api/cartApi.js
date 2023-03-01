@@ -73,7 +73,7 @@ const cartApi = {
         };
     },
 
-    async addItem(product) {        //product = {id: interger, name: string, price: money, quantitiy: integer}
+    async addItem(product) {        //product = {id: interger, name: string, price: money, url: text, quantitiy: integer}
         try {
 
             const result = await fetch(`${root}addItem`, {

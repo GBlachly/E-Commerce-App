@@ -6,11 +6,11 @@ const cartItemsMod = {
     async addItem(data) {
         try {
 
-            const { cartId, productId, productName, productPrice, quantity } = data;
-            const statement = `INSERT INTO carts_products (cart_id, product_id, product_name, product_price, quantity)
-                                VALUES ($1, $2, $3, $4, $5)
+            const { cartId, productId, productName, productPrice, productUrl, quantity } = data;
+            const statement = `INSERT INTO carts_products (cart_id, product_id, product_name, product_price, product_url, quantity)
+                                VALUES ($1, $2, $3, $4, $5, $6)
                                 RETURNING *;`;
-            const values = [cartId, productId, productName, productPrice, quantity];
+            const values = [cartId, productId, productName, productPrice, productUrl, quantity];
             const result = await db.queryNoCB(statement, values);
         
             if (result.rows?.length) {
