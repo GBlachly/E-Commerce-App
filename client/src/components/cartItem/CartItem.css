@@ -1,0 +1,17 @@
+.cart-item {
+    background-color: var(--tertiary-color);
+}
+
+.empty-col {
+    background-color: var(--primary-color);
+}
+
+@media only screen and (max-width: 768px) {
+    .cart-item-details {
+        font-size: .8rem;
+    }
+
+    .cart-item-btns {
+        font-size: .8rem;
+    }
+}

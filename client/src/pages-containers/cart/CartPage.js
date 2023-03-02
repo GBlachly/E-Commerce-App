@@ -81,19 +81,19 @@ export const CartPage = () => {
             <h1>Cart</h1>
             <h2>Cart Id: {cart.id && cart.id}</h2>
             <h3>User Id: {cart.userId && cart.userId}</h3>
-            <h3>Total Price: {totalPrice()}</h3>
+            <h3>Total Price: {`$${totalPrice()}`}</h3>
             <button 
                 className='btn btn-danger'
                 onClick={handleCartClear}
             >Clear Cart</button>
             
-            <div className='row'>
-                {cart.products.map(product => {
-                    return (
-                        <CartItem product={product} />
-                    )
-                })} 
-            </div>
+            
+            {cart.products.map(product => {
+                return (
+                    <CartItem product={product} />
+                )
+            })} 
+            
                
         </div>
     );

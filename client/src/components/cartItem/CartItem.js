@@ -28,28 +28,47 @@ export const CartItem = (props) => {
         };
     };
 
-    
     return (
-        <div className='col-3 mx-auto border border-dark'>
+        <div className='cart-item row my-3'>
+            <div className='empty-col col-md-2'></div>
+            
 
-            <img 
-                src={product.productUrl} 
-                alt='product' 
-                className='w-50 h-auto'
-            />
-            <p>Product Id: {product.productId}</p>
-            <p>Product Name: {product.productName}</p>
-            <p>Product Price: {product.productPrice}</p>
-            <p>Quantity: {product.quantity}</p>
+            <div className='col-3 col-md-2'>
+                <Link to={`/products/${index}`}>
+                    <img 
+                        src={product.productUrl} 
+                        alt='product' 
+                        className='w-100 h-auto mw-100 m-3'
+                    />
+                </Link>
+            </div>
 
-            {product.quantity > stock ? <p className='text-danger'>Please Edit Quantity</p> : null}
 
-            <Link to={`/products/${index}`}>More Details</Link>
-            <button 
-                className='d-block mx-auto btn btn-secondary'
-                onClick={handleDelete}
-            >Delete</button>
+            <div className='cart-item-details col-6 col-md-4 mt-3'>
+                <p>Product Id: {product.productId}</p>
+                <p>Product Name: {product.productName}</p>
+                <p>Product Price: {product.productPrice}</p>
+                <p>Quantity: {product.quantity}</p>
+            </div>
 
+
+            <div className='col-3 col-md-2'>
+                <button 
+                    className='cart-item-btns btn btn-secondary d-block mx-auto my-3'
+                    onClick={handleDelete}
+                >Remove</button>
+
+                <Link to={`/products/${index}`}>
+                    <button
+                        className='cart-item-btns btn btn-secondary d-block mx-auto my-3'
+                    >Edit</button>
+                </Link>
+
+                {product.quantity > stock ? <p className='text-danger'>Please Edit Quantity</p> : null}
+            </div>
+
+
+            <div className='empty-col col-md-2'></div>
         </div>
-    );
+    )
 };

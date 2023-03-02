@@ -3,6 +3,10 @@
     border-bottom: 2px solid gray;
 }
 
+/* .nav {
+    justify-content: center;
+} */
+
 .nav-link {
     color: var(--tertiary-color);
 }
