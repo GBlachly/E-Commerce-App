@@ -32,7 +32,7 @@ export const CartPage = () => {
 
 
     useEffect(() => {
-        dispatch(loadAllProducts);
+        dispatch(loadAllProducts());
         
         if (loggedIn) {
             dispatch(loadUserCart());
