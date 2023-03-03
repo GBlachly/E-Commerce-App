@@ -108,6 +108,7 @@ export const AccountPage = () => {
                 <h3>{user.email ? user.email : 'User Email Here'}</h3>
 
                 <button 
+                    className='btn btn-danger mt-1'
                     onClick={()=>{ dispatch(logoutUser()); dispatch(logoutCart()); }} 
                 >Logout</button>
             </div>
