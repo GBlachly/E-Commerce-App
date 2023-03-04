@@ -34,6 +34,7 @@ const authService = {
                         productId: product.productId, 
                         productName: product.productName, 
                         productPrice: product.productPrice, 
+                        productUrl: product.productUrl,
                         quantity: product.quantity,
                     };
 

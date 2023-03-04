@@ -10,7 +10,7 @@ Users can create an account, add/delete products from their cart, place an order
 
 
 ## TECHNOLOGIES
-PostgreSQL, Express.js, React.js, Node.js
+PostgreSQL, Express, React, Node.js
 
 ## COLLABORATORS
 Greg Blachly

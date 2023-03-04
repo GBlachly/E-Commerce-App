@@ -85,9 +85,13 @@ export const ProductPage = () => {
             <h1>Product</h1>
 
             <div className='product'>
-                <img src={product.url} alt='product' style={{ maxWidth: 250, height: 'auto', }}/>
+                <img 
+                    src={product.url} 
+                    alt='product' 
+                />
                 <p>{product.id}</p>
                 <p>{product.name}</p>
+                <p>{product.description}</p>
                 <p>{product.price}</p>
                 <p>Index: {index}</p>
 
@@ -103,7 +107,9 @@ export const ProductPage = () => {
                     onChange={ (e)=>{setQuantity(e.target.value/1)} }
                 />
 
-                <button onClick={handleClick} >Add to Cart</button>
+                <button 
+                    onClick={handleClick}
+                >Add to Cart</button>
             </div>
 
         </div>

@@ -9,7 +9,6 @@ const options = {
         loggedIn: false,
         isLoading: true, 
         hasError: {
-            genErr: false,
             loginErr: false,
             registerErr: false,
         },
@@ -20,7 +19,7 @@ const options = {
         [registerUser.pending]: (state, action) => {
             state.loggedIn = false;
             state.isLoading = true;
-            state.hasError = { ...state.hasError, registerErr: false };
+            state.hasError = { loginErr: false, registerErr: false };
         },
         [registerUser.fulfilled]: (state, action) => {
             
@@ -28,38 +27,38 @@ const options = {
                 state.user = {};
                 state.loggedIn = false;
                 state.isLoading = false;
-                state.hasError = { ...state.hasError, registerErr: false };
+                state.hasError = { loginErr: false, registerErr: false };
                 return;
             };
 
             state.user = action.payload;
             state.loggedIn = true;
             state.isLoading = false;
-            state.hasError = { ...state.hasError, registerErr: false };
+            state.hasError = { loginErr: false, registerErr: false };
             
         },
         [registerUser.rejected]: (state, action) => {
             state.loggedIn = false;
             state.isLoading = false;
-            state.hasError = { ...state.hasError, registerErr: true };
+            state.hasError = { loginErr: false, registerErr: true };
         },
 
         //LOGIN ACTION STATES
         [loginUser.pending]: (state, action) => {
             state.loggedIn = false;
             state.isLoading = true;
-            state.hasError = { ...state.hasError, loginErr: false };
+            state.hasError = { registerErr: false, loginErr: false };
         },
         [loginUser.fulfilled]: (state, action) => {
             state.user = action.payload;
             state.loggedIn = true;
             state.isLoading = false;
-            state.hasError = { ...state.hasError, loginErr: false };
+            state.hasError = { registerErr: false, loginErr: false };
         },
         [loginUser.rejected]: (state, action) => {
             state.loggedIn = false;
             state.isLoading = false;
-            state.hasError = { ...state.hasError, loginErr: true };
+            state.hasError = { registerErr: false, loginErr: true };
         },
 
         //LOGOUT ACTION STATES

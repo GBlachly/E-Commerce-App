@@ -9,7 +9,7 @@ const productsApi = {
     async create(data) {
         try {
 
-            const { name, price, stock } = data;
+            const { name, price, stock, url, description } = data;
 
             const result = await fetch(`${root}`, {
                 method: 'POST',
@@ -18,6 +18,8 @@ const productsApi = {
                     name,
                     price,
                     stock,
+                    url, 
+                    description,
                 }),
                 headers: headers,
             });
@@ -65,10 +67,10 @@ const productsApi = {
         };
     },
 
-    async update(data) {
+    async updateAllInfo(data) {
         try {
 
-            const { id, name, price, stock } = data;
+            const { id, name, price, stock, url, description } = data;
 
             const result = await fetch(`${root}id/${id}`, {
                 method: 'PUT',
@@ -77,6 +79,8 @@ const productsApi = {
                     name,
                     price,
                     stock,
+                    url,
+                    description
                 }),
                 headers: headers,
             });
