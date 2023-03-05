@@ -12,9 +12,9 @@ productsRouter.get('/id/:id', productsService.getById);
 //ADMIN ROUTES
 productsRouter.post('/', productsService.create);
 
-productsRouter.put('/id/:id', productsService.update);
+productsRouter.put('/update/:id', productsService.update)
 
-productsRouter.delete('/id/:id', productsService.delete);
+productsRouter.delete('/delete/:id', productsService.delete);
 
 
 module.exports = productsRouter;

@@ -67,20 +67,17 @@ const productsApi = {
         };
     },
 
-    async updateAllInfo(data) {
+    async update(data) {
         try {
 
-            const { id, name, price, stock, url, description } = data;
+            const { id, category, update } = data;
 
-            const result = await fetch(`${root}id/${id}`, {
+            const result = await fetch(`${root}update/${id}`, {
                 method: 'PUT',
                 credentials: 'include',
                 body: JSON.stringify({
-                    name,
-                    price,
-                    stock,
-                    url,
-                    description
+                    category,
+                    update, 
                 }),
                 headers: headers,
             });
@@ -96,7 +93,7 @@ const productsApi = {
     async delete(id) {
         try {
 
-            const result = await fetch(`${root}id/${id}`, {
+            const result = await fetch(`${root}delete/${id}`, {
                 method: 'DELETE',
                 credentials: 'include',
             });

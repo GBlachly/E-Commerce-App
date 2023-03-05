@@ -63,27 +63,7 @@ const cartsMod = {
     },
 
     //UPDATE
-    /* async update(data) {
-        try {
 
-            const { userId, totalPrice } = data;
-            const statement = `UPDATE carts
-                                SET total_price = $2
-                                WHERE user_id = $1
-                                RETURNING *;`;
-            const values = [userId, totalPrice];
-            const result = await db.queryNoCB(statement, values);
-
-            if (result.rows?.length) {
-                return result.rows[0];
-            };
-
-            return null;
-
-        } catch(err) {
-            throw new Error(err);
-        };
-    }, */
 
     //DELETE
     async delete(id) {

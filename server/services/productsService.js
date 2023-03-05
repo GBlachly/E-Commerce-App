@@ -1,4 +1,5 @@
-const productsMod = require('../models/productsModel')
+const productsMod = require('../models/productsModel');
+const cartItemsMod = require('../models/cartItemsModel');
 
 
 const productsService = {
@@ -52,10 +53,11 @@ const productsService = {
         try {
 
             const id = Number(req.params.id);
-            const { name, price, stock, url, description } = req.body;
+            const { category, update } = req.body;
 
-            const product = await productsMod.update({ id, name, price, stock, url, description });
-            res.status(200).json({ data: product });
+            const updatedProduct = await productsMod.update({ id, category, update });
+            const updatedCartItems = await cartItemsMod.update({ id, category, update });
+            res.status(200).json({ data: updatedProduct });
 
         } catch(err) {
             next(err);

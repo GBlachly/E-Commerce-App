@@ -35,6 +35,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
+/* SEND STATIC FILES (IMAGES) (???)
+const path = require('path') 
+app.use('/static', express.static(path.join(__dirname, 'client/build(???)')))
+
+--MAY NEED TO ADD A BUILD FOLDER TO CLIENT (NOT SURE WHAT TO PUT INSIDE IT)
+*/
+
 
 //SESSIONS
 app.use(session({
@@ -89,6 +96,15 @@ app.use((err, req, res, next) => {
     console.log(message);
     res.status(status).send(message);
 });
+
+
+/* SEND CLIENT/REACT APP (???)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html(???)')); 
+});
+
+--MAY NEED TO ADD A BUILD FOLDER TO CLIENT (NOT SURE WHAT TO PUT INSIDE IT)
+*/
 
 
 //LISTEN

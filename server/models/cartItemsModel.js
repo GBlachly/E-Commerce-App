@@ -45,6 +45,55 @@ const cartItemsMod = {
     },
 
     //UPDATE
+    //(will update cart items if admin updates the information of a product)
+    async update(data) {
+        try {
+
+            const { id, category, update } = data;
+
+            statement = '';
+
+            switch (category) {
+                case 'name':
+                    statement = `UPDATE carts_products
+                                SET product_name = $2
+                                WHERE product_id = $1
+                                RETURNING *;`;
+                    break;
+
+                case 'price':
+                    statement = `UPDATE carts_products
+                                SET product_price = $2
+                                WHERE product_id = $1
+                                RETURNING *;`;
+                    break;
+
+                case 'url':
+                    statement = `UPDATE carts_products
+                                SET product_url = $2
+                                WHERE product_id = $1
+                                RETURNING *;`;
+                    break;
+
+                default:
+                    statement = ``;
+                    break;
+            };
+
+            const values = [id, update];
+            const result = await db.queryNoCB(statement, values);
+
+            if (result.rows?.length) {
+                return result.rows;
+            };
+
+            return [];
+
+        } catch(err) {
+            throw new Error(err);
+        };
+    },
+
     async updateQuantity(data) {
         try {
 

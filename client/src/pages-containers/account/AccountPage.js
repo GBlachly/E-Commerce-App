@@ -1,7 +1,7 @@
 import './AccountPage.css';
 import React, { useState, useEffect } from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 import cartApi from '../../api/cartApi';
 import { selectUser, selectAuthError, selectLoggedIn } from '../../store/auth/authSlice';
@@ -112,6 +112,8 @@ export const AccountPage = () => {
                     onClick={()=>{ dispatch(logoutUser()); dispatch(logoutCart()); }} 
                 >Logout</button>
             </div>
+
+            {user.admin && <Link to='/admin' className='btn btn-success mt-1'>Admin Page</Link>}
             
         </div>
     );

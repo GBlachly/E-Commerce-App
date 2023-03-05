@@ -83,21 +83,61 @@ const productsMod = {
     },
 
     //UPDATE
-    async updateAllInfo(data) {
+    async update(data) {
         try {
 
-            const { id, name, price, stock, url, description } = data
-            const statement = `UPDATE products
-                                SET name = $2, price = $3, stock = $4, url = $5, description = $6
+            const { id, category, update } = data;
+
+            let statement = '';
+
+            switch (category) {
+                case 'name':
+                    statement = `UPDATE products
+                                SET name = $2
                                 WHERE id = $1
                                 RETURNING *;`;
-            const values = [id, name, price, stock, url, description];
+                    break;
+
+                case 'price':
+                    statement = `UPDATE products
+                                SET price = $2
+                                WHERE id = $1
+                                RETURNING *;`;
+                    break;
+
+                case 'stock':
+                    statement=`UPDATE products
+                                SET stock = $2
+                                WHERE id = $1
+                                RETURNING *;`;
+                    break;
+
+                case 'url':
+                    statement=`UPDATE products
+                                SET url = $2
+                                WHERE id = $1
+                                RETURNING *;`;
+                    break;
+
+                case 'description':
+                    statement=`UPDATE products
+                                SET description = $2
+                                WHERE id = $1
+                                RETURNING *;`;
+                    break;
+
+                default:
+                    statement = '';
+                    break;
+            };
+
+            const values = [id, update];
             const result = await db.queryNoCB(statement, values);
-        
+
             if (result.rows?.length) {
                 return result.rows[0];
             };
-        
+
             return null;
 
         } catch(err) {
