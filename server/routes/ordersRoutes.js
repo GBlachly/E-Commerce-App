@@ -10,9 +10,9 @@ ordersRouter.get('/id/:id', ordersService.getById);        //get a single order 
 
 ordersRouter.get('/user/:id', ordersService.getByUserId);      //get all orders for a user Id
 
-ordersRouter.put('/id/:id', ordersService.update);
+ordersRouter.put('/update/:id', ordersService.update);
 
-ordersRouter.delete('/id/:id', ordersService.delete);
+ordersRouter.delete('/delete/:id', ordersService.delete);
 
 
 module.exports = ordersRouter;

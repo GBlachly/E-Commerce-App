@@ -71,7 +71,6 @@ export const UpdateProduct = () => {
                         for='categoryList'
                         className='mr-2'
                     >Information To Update</label>
-
                     <select 
                         id='categoryList' 
                         name='category' 

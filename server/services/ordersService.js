@@ -9,12 +9,10 @@ const ordersService = {
 
             let userId;
 
-            if (req.user) {
-                userId = req.user.id;
-            };
-
             if (req.params.id) {
                 userId = Number(req.params.id);
+            } else {
+                userId = req.user.id;
             };
 
             const ordersResult = await ordersMod.getByUserId(userId);
@@ -87,9 +85,10 @@ const ordersService = {
         try {
     
             const id = Number(req.params.id);
-            const { totalPrice, shipStatus, products } = req.body;
-            const orderResult = await ordersMod.update({ id, totalPrice, shipStatus });
+            const { category, update/*, products*/ } = req.body;
+            const orderResult = await ordersMod.update({ id, category, update });
             
+            /*
             const updatedProducts = [];
             products.forEach(async (product) => {
                 const updatedProduct = await orderItemsMod.update({
@@ -108,13 +107,14 @@ const ordersService = {
 
                 updatedProducts.push(updatedProductObj);
             });
+            */
 
             const updatedOrder = {
                 id: id,
                 userId: orderResult.user_id,
                 totalPrice: orderResult.total_price,
                 shipStatus: orderResult.ship_status,
-                products: updatedProducts
+                //products: updatedProducts
             };
 
             res.status(200).json({ data: updatedOrder });

@@ -14,7 +14,8 @@ export const Order = (props) => {
                 <h4>Order Index: {index}</h4>
                 <h4>User Id: {order.userId}</h4>
                 <h4>Total Price: {order.totalPrice}</h4>
-                <h4>Ship Status: {order.shipStatus ? 'Shipped' : 'Not Yet Shipped'}</h4>
+                <h4>Ship Status: {order.shipStatus}</h4>
+
                 
                 {order.products.map(product => {
                     return (

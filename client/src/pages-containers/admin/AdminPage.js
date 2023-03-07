@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom';
 
 import { selectLoggedIn, selectUser } from '../../store/auth/authSlice';
 import { UpdateProduct } from '../../components/updateProduct/updateProduct';
+import { UpdateOrders } from '../../components/updateOrders/updateOrders';
 
 
 export const AdminPage = () => {
@@ -29,6 +30,8 @@ export const AdminPage = () => {
             <h1>Admin</h1>
 
             <UpdateProduct />
+
+            <UpdateOrders />
 
         </div>
     );

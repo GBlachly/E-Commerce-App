@@ -43,20 +43,19 @@ const ordersApi = {
     async update(data) {
         try {
 
-            const { id, totalPrice, shipStatus, products } = data;
+            const { id, category, update } = data;
 
-            const result = await fetch(`${root}id/${id}`, {
+            const result = await fetch(`${root}update/${id}`, {
                 method: 'PUT',
                 credentials: 'include',
                 body: JSON.stringify({
-                    totalPrice,
-                    shipStatus,
-                    products,
+                    category,
+                    update,
                 }),
                 headers: headers,
             });
 
-            const json = result.json();
+            const json = await result.json();
             return json.data;
 
         } catch(err) {
@@ -67,7 +66,7 @@ const ordersApi = {
     async delete(id) {
         try {
 
-            const result = await fetch(`${root}id/${id}`, {
+            const result = await fetch(`${root}delete/${id}`, {
                 method: 'DELETE',
                 credentials: 'include',
             });
