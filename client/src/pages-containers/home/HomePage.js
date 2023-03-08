@@ -24,7 +24,7 @@ export const HomePage = () => {
 
             <div className='banner'>
                 <div className='title-card'>
-                    <h1>Welcome to the Wide World of Non-Branded Office Supplies</h1>
+                    <h1>Welcome to the Wide World of Items</h1>
                 </div>
             </div>
 
