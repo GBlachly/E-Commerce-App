@@ -38,7 +38,7 @@ export const CheckoutPage = () => {
 
     if (cart.products.length === 0) {
         return (
-            <div className='col-12'>
+            <div className='col-12 mt-3'>
                 <h1>Cart Empty</h1>
             </div>
         )
@@ -46,7 +46,7 @@ export const CheckoutPage = () => {
 
     if (isLoading) {
         return (
-            <div className='col-12'>
+            <div className='col-12 mt-3'>
                 <h1>Loading...</h1>
             </div>
         )
@@ -54,7 +54,7 @@ export const CheckoutPage = () => {
 
     if (hasError) {
         return (
-            <div className='col-12'>
+            <div className='col-12 mt-3'>
                 <h1>Error Occurred</h1>
                 <Link to='/cart' >Return to Cart</Link>
             </div>
@@ -62,7 +62,7 @@ export const CheckoutPage = () => {
     };
 
     return (
-        <div className='col-12'>
+        <div className='col-12 mt-3'>
 
             <h1>Checkout</h1>
             <h2>Total Price: {totalPrice()}</h2>

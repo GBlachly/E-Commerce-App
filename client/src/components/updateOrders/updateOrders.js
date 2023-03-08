@@ -21,9 +21,7 @@ export const UpdateOrders = () => {
             if (!response) {
                 setSearchErr(true);
             } else {
-                const oneOrderArray = [];
-                oneOrderArray.push(response);
-                setOrders(oneOrderArray);
+                setOrders([response]);
             };
         }).catch(err => setSearchErr(true));
 
@@ -65,6 +63,7 @@ export const UpdateOrders = () => {
             <form className='col-12' onSubmit={handleIdSubmit}>
                 <label
                     for='orderIdInput'
+                    className='mr-2'
                 >Search By Order ID</label>
                 <input 
                     type='text' 
@@ -78,6 +77,7 @@ export const UpdateOrders = () => {
             <form className='col-12' onSubmit={handleUserIdSubmit}>
                 <label
                     for='userIdInput'
+                    className='mr-2'
                 >Search By User ID</label>
                 <input 
                     type='text' 

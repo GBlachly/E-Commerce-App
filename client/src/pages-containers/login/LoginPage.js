@@ -42,7 +42,7 @@ export const LoginPage = () => {
     };
 
     return (
-        <div className='col-12'>
+        <div className='col-12 mt-3'>
             
             <h1>Login</h1>
             {hasError.loginErr && <h3>Incorrect Username or Password</h3>}

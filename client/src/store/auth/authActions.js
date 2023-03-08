@@ -10,8 +10,8 @@ export const registerUser = createAsyncThunk(
         const registerResponse = await authApi.register(data);
 
         if (registerResponse) {
-            const loginResponse = await authApi.login({ username, password })
-            return loginResponse 
+            const loginResponse = await authApi.login({ username, password });
+            return loginResponse;
         } else {
             return null;
         };

@@ -1,0 +1,54 @@
+.banner {
+    background-image: url('https://res.cloudinary.com/dk4ghzlai/image/upload/v1678307896/ecommerce-app-products/IBM_B_C3_B6blingen_Entwicklung_und_Forschung_briefing_center_during_installation1984_nw52nt.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .title-card {
+    font-size: .75rem;
+    text-align: center;
+    z-index: 1;
+    width: 65%;
+    padding: .25rem 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--quaternary-color);
+    border: 3px solid black;
+    border-radius: 10px;
+    box-shadow: 5px 10px black;
+}
+
+.about {
+    text-align: start;
+}
+
+.about img {
+    float: left;
+    width: 30%;
+    height: auto;
+}
+
+.about p {
+    text-align: justify;
+}
+
+@media only screen and (max-width: 768px) {
+    
+    .title-card {
+        width: 100%;
+    }
+
+    .about img {
+        width: 50%;
+    }
+    
+}
+  

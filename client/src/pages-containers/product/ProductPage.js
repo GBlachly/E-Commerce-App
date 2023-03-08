@@ -80,7 +80,7 @@ export const ProductPage = () => {
 
 
     return (
-        <div className='col-12'>
+        <div className='col-12 mt-3'>
 
             <h1>Product</h1>
 

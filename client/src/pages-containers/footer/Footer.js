@@ -1,13 +1,13 @@
-import './Header.css';
+import './Footer.css';
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
 
-export const Header = () => {
+export const Footer = () => {
 
     return (
         <div className='col-12'>
-            
+
             <div className=''>
                 <nav>
                     <ul className='nav'>

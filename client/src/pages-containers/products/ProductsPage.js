@@ -27,7 +27,7 @@ export const ProductsPage = () => {
 
     if (isLoading) {
         return (
-            <div className='col-12'>
+            <div className='col-12 mt-3'>
                 <h1>Loading...</h1>
             </div>
         )
@@ -35,14 +35,14 @@ export const ProductsPage = () => {
 
     if (hasError) {
         return (
-            <div className='col-12'>
+            <div className='col-12 mt-3'>
                 <h1>Error Occurred</h1>
             </div>
         )
     };
     
     return (
-        <div className='col-12'>
+        <div className='col-12 mt-3'>
 
             <h1>Products</h1>
             

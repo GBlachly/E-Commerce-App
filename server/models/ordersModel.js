@@ -29,7 +29,8 @@ const ordersMod = {
         try {
 
             const statement = `SELECT * FROM orders 
-                                WHERE user_id = $1;`;
+                                WHERE user_id = $1
+                                ORDER BY id DESC;`;
             const values = [userId];
             const result = await db.queryNoCB(statement, values);
         

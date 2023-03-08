@@ -64,7 +64,7 @@ export const AccountPage = () => {
 
     if (cartLoading) {
         return (
-            <div className='col-12'>
+            <div className='col-12 mt-3'>
                 <h1>Loading...</h1>
             </div>
         );
@@ -72,7 +72,7 @@ export const AccountPage = () => {
 
     if (authError.loginErr || authError.registerErr) {    //SHOULD I USE AUTH ERR, OR CART ERR, OR BOTH???
         return (
-            <div className='col-12'>
+            <div className='col-12 mt-3'>
                 <h1>Error Occurred</h1>
             </div>
         );
@@ -93,7 +93,7 @@ export const AccountPage = () => {
     
     //USER ACCOUNT INFO 
     return (
-        <div className='col-12'>
+        <div className='col-12 mt-3'>
             
             <h1>Account</h1>
 

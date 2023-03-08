@@ -55,7 +55,7 @@ export const CartPage = () => {
 
     if (isLoading) {
         return (
-            <div className='col-12'>
+            <div className='col-12 mt-3'>
                 <h1>Loading...</h1>
             </div>
         )
@@ -63,7 +63,7 @@ export const CartPage = () => {
 
     if (hasError) {
         return (
-            <div className='col-12'>
+            <div className='col-12 mt-3'>
                 <h1>Error Occurred</h1>
             </div>
         )
@@ -71,14 +71,14 @@ export const CartPage = () => {
     
     if (!cart || cart.products.length === 0) {
         return (
-            <div className='col-12'>
+            <div className='col-12 mt-3'>
                 <h1>Cart Empty</h1>
             </div>
         )
     };
 
     return (
-        <div className='col-12'>
+        <div className='col-12 mt-3'>
 
             <h1>Cart</h1>
             <h2>Cart Id: {cart.id && cart.id}</h2>

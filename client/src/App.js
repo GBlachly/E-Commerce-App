@@ -11,6 +11,7 @@ import { OrdersPage } from './pages-containers/orders/OrdersPage';
 import { CartPage } from './pages-containers/cart/CartPage';
 import { CheckoutPage } from './pages-containers/checkout/CheckoutPage';
 import { AdminPage } from './pages-containers/admin/AdminPage';
+import { Footer } from './pages-containers/footer/Footer';
 
 
 function App() {
@@ -18,11 +19,11 @@ function App() {
     <div className="app container-fluid text-center">
       <Router>
 
-        <div className='row'>
+        <div className='row' id='header'>
           <Header />
         </div>
         
-        <div className='row mt-4'>
+        <div className='row' id='main'>
           <Routes>
             <Route exact path='/' element={<HomePage />} />
             
@@ -38,6 +39,10 @@ function App() {
             
             <Route exact path='/admin' element={<AdminPage />} />
           </Routes>
+        </div>
+
+        <div className='row' id='footer'>
+          <Footer />
         </div>
 
       </Router>
