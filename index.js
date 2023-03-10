@@ -82,11 +82,11 @@ passport.use('local', localStrategy);
 
 
 //ROUTES
-app.use('/auth', authRouter);
-app.use('/user', userRouter);
-app.use('/products', productsRouter);
-app.use('/orders', ordersRouter);
-app.use('/cart', cartRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/user', userRouter);
+app.use('/api/products', productsRouter);
+app.use('/api/orders', ordersRouter);
+app.use('/api/cart', cartRouter);
 
 
 //ERROR HANDLING

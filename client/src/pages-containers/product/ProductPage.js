@@ -91,7 +91,7 @@ export const ProductPage = () => {
                 />
                 <p>{product.id}</p>
                 <p>{product.name}</p>
-                <p>{product.description}</p>
+                <p className='w-50 mx-auto'>{product.description}</p>
                 <p>{product.price}</p>
                 <p>Index: {index}</p>
 

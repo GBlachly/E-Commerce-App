@@ -1,4 +1,4 @@
-const root = 'http://localhost:4001/cart/';
+const root = 'http://localhost:4001/api/cart/';
 const headers = {
     "Content-Type": "application/json",
 };

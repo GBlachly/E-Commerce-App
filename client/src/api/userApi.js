@@ -1,4 +1,4 @@
-const root = 'http://localhost:4001/user/';
+const root = 'http://localhost:4001/api/user/';
 const headers = {
     "Content-Type": "application/json",
 };
