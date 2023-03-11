@@ -150,7 +150,7 @@ const cartApi = {
         };
     },
 
-    async checkout(totalPrice) {
+    async checkout(totalPrice, addressId) {
         try {
 
             const result = await fetch(`${root}checkout`, {
@@ -158,6 +158,7 @@ const cartApi = {
                 credentials: 'include',
                 body: JSON.stringify({
                     totalPrice,
+                    addressId
                 }),
                 headers: headers,
             });

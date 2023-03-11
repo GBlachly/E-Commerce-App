@@ -1,5 +1,6 @@
 const ordersMod = require('../models/ordersModel');
 const orderItemsMod = require('../models/orderItemsModel');
+const addressesMod = require('../models/addressesModel');
 
 
 const ordersService = {
@@ -19,6 +20,22 @@ const ordersService = {
             const orders = [];
 
             for (let i=0; i < ordersResult.length; i++) {
+
+                const addressResult = await addressesMod.getById(ordersResult[i].address_id);
+                let address = {};
+                if (addressResult) {
+                    address = {
+                        id: addressResult.id,
+                        userId: addressResult.user_id,
+                        name: addressResult.name,
+                        line1: addressResult.line_1,
+                        line2: addressResult.line_2,
+                        city: addressResult.city,
+                        state: addressResult.state,
+                        country: addressResult.country,
+                        zipCode: addressResult.zip_code,
+                    };
+                };
                 
                 const orderItemsResult = await orderItemsMod.getItemsByOrderId(ordersResult[i].id);
                 
@@ -36,6 +53,7 @@ const ordersService = {
                     userId: ordersResult[i].user_id,
                     totalPrice: ordersResult[i].total_price,
                     shipStatus: ordersResult[i].ship_status,
+                    address: address,
                     products: products
                 };
 
@@ -54,8 +72,21 @@ const ordersService = {
     
             const id = Number(req.params.id);
             const orderResult = await ordersMod.getById(id);
+            
+            const addressResult = await addressesMod.getById(orderResult.address_id);
+            const address = {
+                id: addressResult.id,
+                userId: addressResult.user_id,
+                name: addressResult.name,
+                line1: addressResult.line_1,
+                line2: addressResult.line_2,
+                city: addressResult.city,
+                state: addressResult.state,
+                country: addressResult.country,
+                zipCode: addressResult.zip_code,
+            };
+            
             const orderItemsResult = await orderItemsMod.getItemsByOrderId(id);
-
             const products = [];
             orderItemsResult.forEach(item => products.push({
                 productId: item.product_id,
@@ -70,6 +101,7 @@ const ordersService = {
                 userId: orderResult.user_id,
                 totalPrice: orderResult.total_price,
                 shipStatus: orderResult.ship_status,
+                address: address,
                 products: products
             };
 
@@ -114,6 +146,7 @@ const ordersService = {
                 userId: orderResult.user_id,
                 totalPrice: orderResult.total_price,
                 shipStatus: orderResult.ship_status,
+                addressId: orderResult.address_id,
                 //products: updatedProducts
             };
 
@@ -146,6 +179,7 @@ const ordersService = {
                 userId: orderResult.user_id,
                 totalPrice: orderResult.total_price,
                 shipStatus: orderResult.ship_status,
+                addressId: orderResult.address_id,
                 products: deletedProducts
             };
 

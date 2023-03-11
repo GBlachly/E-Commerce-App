@@ -1,5 +1,5 @@
 import './CheckoutPage.css';
-import React from 'react'; 
+import React, { useState } from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Navigate } from 'react-router-dom';
 
@@ -15,6 +15,8 @@ export const CheckoutPage = () => {
     const cart = useSelector(selectCart);
     const dispatch = useDispatch();
 
+    const [ addressId, setAddressId ] = useState('1')   /*STILL HAVE ADD ABILITY TO SET ADDRESS */
+    
 
     //WILL AT TIMES HAVE A LOT OF DECIMAL PLACES, MUST STOP AT TWO
     const totalPrice = () => {
@@ -68,7 +70,14 @@ export const CheckoutPage = () => {
             <h2>Total Price: {totalPrice()}</h2>
 
             <div className='checkout'>
-                <button onClick={ ()=>{dispatch(checkout(totalPrice()))} }>Checkout!!!</button>
+                <button 
+                    onClick={ ()=>{
+                        dispatch(checkout({
+                            totalPrice: totalPrice(), 
+                            addressId: addressId, 
+                        }));
+                    } }
+                >Checkout!!!</button>
             </div>
 
         </div>

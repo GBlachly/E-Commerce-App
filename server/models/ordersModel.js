@@ -6,11 +6,11 @@ const ordersMod = {
     async create(data) {
         try {
 
-            const { userId, totalPrice } = data;
-            const statement = `INSERT INTO orders (user_id, total_price)
-                                VALUES ($1, $2)
+            const { userId, totalPrice, addressId } = data;
+            const statement = `INSERT INTO orders (user_id, total_price, address_id)
+                                VALUES ($1, $2, $3)
                                 RETURNING *;`;
-            const values = [userId, totalPrice];
+            const values = [userId, totalPrice, addressId];
             const result = await db.queryNoCB(statement, values);
         
             if (result.rows?.length) {

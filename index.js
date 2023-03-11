@@ -19,6 +19,7 @@ const userRouter = require('./server/routes/userRoutes');
 const productsRouter = require('./server/routes/productsRoutes');
 const ordersRouter = require('./server/routes/ordersRoutes');
 const cartRouter = require('./server/routes/cartRoutes');
+const addressesRouter = require('./server/routes/addressesRoutes');
 
 require('dotenv').config();
 const PORT = process.env.SERVER_PORT;
@@ -87,6 +88,7 @@ app.use('/api/user', userRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/orders', ordersRouter);
 app.use('/api/cart', cartRouter);
+app.use('/api/addresses', addressesRouter);
 
 
 //ERROR HANDLING

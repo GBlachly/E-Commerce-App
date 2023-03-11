@@ -3,6 +3,7 @@ const cartItemsMod = require('../models/cartItemsModel');
 const ordersMod = require('../models/ordersModel');
 const orderItemsMod = require('../models/orderItemsModel');
 const productsMod = require('../models/productsModel');
+const addressesMod = require('../models/addressesModel');
 
 
 const checkoutService = async (req, res, next) => {
@@ -10,7 +11,7 @@ const checkoutService = async (req, res, next) => {
 
         //GET CART INFO + DESTRUCTURE REQ.BODY
         const userId = req.user.id;
-        const { totalPrice } = req.body;
+        const { totalPrice, addressId } = req.body;     /*!!!CHOOSE THE ADDRESS ID IN THE FRONT END!!!*/
 
         const cartResult = await cartsMod.getByUserId(userId);
         const cartItemsResult = await cartItemsMod.getItemsByCartId(cartResult.id);
@@ -34,7 +35,7 @@ const checkoutService = async (req, res, next) => {
 
 
         //CREATE ORDER
-        const orderResult = await ordersMod.create({ userId, totalPrice });
+        const orderResult = await ordersMod.create({ userId, totalPrice, addressId });  /*CHOOSE THE ADDRESS IN THE FRONT END*/
 
 
         //UPDATE STOCK OF PRODUCTS + ADD ORDER ITEMS 
@@ -69,10 +70,26 @@ const checkoutService = async (req, res, next) => {
             products.push(addedItemInfo);       //NOT CURRENTLY USED/NECESSARY
         });
 
-        const orderData = {         //NOT CURRENTLY USED/NECESSARY
+        
+        //ORGANIZE ORDER DATA TO BE SENT    //NOT CURRENTLY USED/NECESSARY
+        const addressResult = await addressesMod.getById(addressId);
+        const address = {
+            id: addressResult.id,
+            userId: addressResult.user_id,
+            name: addressResult.name,
+            line1: addressResult.line_1,
+            line2: addressResult.line_2,
+            city: addressResult.city,
+            state: addressResult.state,
+            country: addressResult.country,
+            zipCode: addressResult.zip_code,
+        };
+
+        const orderData = {
             id: orderResult.id,
             userId: orderResult.user_id,
             totalPrice: orderResult.total_price,
+            address, address, 
             products: products,
         }; 
         

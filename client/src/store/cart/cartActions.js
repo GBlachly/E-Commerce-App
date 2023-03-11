@@ -72,9 +72,11 @@ export const clearCartItems = createAsyncThunk(
 
 export const checkout = createAsyncThunk(
     'cart/checkout',
-    async (totalPrice) => {
+    async (data) => {
 
-        const response = await cartApi.checkout(totalPrice);
+        const { totalPrice, addressId } = data;
+
+        const response = await cartApi.checkout(totalPrice, addressId);
         return response;
     }
 );
