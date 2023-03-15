@@ -18,19 +18,13 @@ const checkoutService = async (req, res, next) => {
 
 
         //CHECK IF ENOUGH STOCK FOR ORDER
-        let notEnoughStock = false;
         for (let item of cartItemsResult) {
             const productResult = await productsMod.getById(item.product_id);
             const currentStock = productResult.stock;
             const requestedQuantity = item.quantity;
             if (requestedQuantity > currentStock) {
-                notEnoughStock = true;
-                break;
+                throw new Error('Not Enough Stock');
             };
-        };
-        
-        if (notEnoughStock) {
-            throw new Error('Not Enough Stock');
         };
 
 
