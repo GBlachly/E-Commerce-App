@@ -18,7 +18,7 @@ const addressesMod = {
             } = data;
 
             const statement = `INSERT INTO addresses(user_id, name, line_1, line_2, city, state, country, zip_code)
-                                VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
+                                VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
                                 RETURNING *`;
             const values = [userId, name, line1, line2, city, state, country, zipCode];
             const result = await db.queryNoCB(statement, values);
@@ -36,25 +36,6 @@ const addressesMod = {
 
 
     //READ
-    async getById(id) {
-        try {
-
-            const statement = `SELECT * FROM addresses
-                                WHERE id = $1`;
-            const values = [id];
-            const result = await db.queryNoCB(statement, values);
-
-            if (result.rows?.length) {
-                return result.rows[0];
-            };
-
-            return null;
-
-        } catch(err) {
-            throw new Error(err);
-        };
-    },
-
     async getByUserId(userId) {
         try {
 
@@ -68,6 +49,25 @@ const addressesMod = {
             };
 
             return [];
+
+        } catch(err) {
+            throw new Error(err);
+        };
+    },
+
+    async getById(id) {
+        try {
+
+            const statement = `SELECT * FROM addresses
+                                WHERE id = $1`;
+            const values = [id];
+            const result = await db.queryNoCB(statement, values);
+
+            if (result.rows?.length) {
+                return result.rows[0];
+            };
+
+            return null;
 
         } catch(err) {
             throw new Error(err);

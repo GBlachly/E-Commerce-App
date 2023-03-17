@@ -33,7 +33,19 @@ const addressesService = {
                 zipCode
             });
 
-            res.status(200).json({ data: addressResult });
+            const address = {
+                id: addressResult.id,
+                userId: addressResult.user_id,
+                name: addressResult.name,
+                line1: addressResult.line_1,
+                line2: addressResult.line_2,
+                city: addressResult.city,
+                state: addressResult.state,
+                country: addressResult.country,
+                zipCode: addressResult.zip_code, 
+            };
+
+            res.status(200).json({ data: address });
 
         } catch(err) {
             return next(err);
@@ -44,7 +56,13 @@ const addressesService = {
     async getByUserId(req, res, next) {
         try {
 
-            const userId = req.user.id;
+            let userId;
+
+            if (req.params.id) {
+                userId = Number(req.params.id);
+            } else {
+                userId = req.user.id;
+            };
 
             const addressesResult = await addressesMod.getByUserId(userId);
 
@@ -72,6 +90,33 @@ const addressesService = {
             return next(err);
         };
     },
+
+    async getById(req, res, next) {
+        try {
+
+            const id = Number(req.params.id);
+
+            const addressResult = await addressesMod.getById(id);
+
+            const address = {
+                id: addressResult.id,
+                userId: addressResult.user_id,
+                name: addressResult.name,
+                line1: addressResult.line_1,
+                line2: addressResult.line_2,
+                city: addressResult.city,
+                state: addressResult.state,
+                country: addressResult.country,
+                zipCode: addressResult.zip_code, 
+            };
+
+            res.status(200).json({ data: address });
+
+        } catch(err) {
+            return next(err);
+        };
+
+    }
 };
 
 

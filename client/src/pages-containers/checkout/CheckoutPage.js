@@ -6,6 +6,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { selectLoggedIn } from '../../store/auth/authSlice';
 import { selectCart, selectCartLoading, selectCartError } from '../../store/cart/cartSlice';
 import { checkout } from '../../store/cart/cartActions';
+import { AddressForm } from '../../components/addressForm/AddressForm';
 
 
 export const CheckoutPage = () => {
@@ -15,7 +16,7 @@ export const CheckoutPage = () => {
     const cart = useSelector(selectCart);
     const dispatch = useDispatch();
 
-    const [ addressId, setAddressId ] = useState('1')   /*STILL HAVE ADD ABILITY TO SET ADDRESS */
+    const [ addressId, setAddressId ] = useState(null);
     
 
     //WILL AT TIMES HAVE A LOT OF DECIMAL PLACES, MUST STOP AT TWO
@@ -63,6 +64,15 @@ export const CheckoutPage = () => {
         )
     };
 
+    if (!addressId) {
+        return (
+            <div className='col-12'>
+                <h1>Add Address Info</h1>
+                <AddressForm setAddressId={setAddressId}/>
+            </div>
+        );
+    };
+
     return (
         <div className='col-12 mt-3'>
 
@@ -72,10 +82,13 @@ export const CheckoutPage = () => {
             <div className='checkout'>
                 <button 
                     onClick={ ()=>{
+
                         dispatch(checkout({
                             totalPrice: totalPrice(), 
                             addressId: addressId, 
                         }));
+
+                        setAddressId(null);
                     } }
                 >Checkout!!!</button>
             </div>

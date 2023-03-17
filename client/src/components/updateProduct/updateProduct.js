@@ -62,7 +62,7 @@ export const UpdateProduct = () => {
                         type='number'
                         name='id'
                         value={productId}
-                        onChange={ (e) => {setProductId(e.target.value)}}
+                        onChange={ (e) => {setProductId(e.target.value)} }
                     />
                 </section>
 
@@ -74,7 +74,7 @@ export const UpdateProduct = () => {
                     <select 
                         id='categoryList' 
                         name='category' 
-                        onChange={ (e) => {setUpdateCategory(e.target.value)}}
+                        onChange={ (e) => {setUpdateCategory(e.target.value)} }
                     >   
                         <option value=''>-</option>
                         <option value='name'>Name</option>

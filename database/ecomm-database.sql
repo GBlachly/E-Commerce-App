@@ -110,6 +110,6 @@ CREATE TABLE payment_info (
     expiration_date (?)DATE(?) NOT NULL,
     security_code INT NOT NULL,
     zip_code INT NOT NULL,
-    addresses_id INT REFERENCES addresses(id) NOT NULL
+    address_id INT REFERENCES addresses(id) NOT NULL
 );
 */
