@@ -6,7 +6,8 @@ import { Link, Navigate } from 'react-router-dom';
 import { selectLoggedIn } from '../../store/auth/authSlice';
 import { selectCart, selectCartLoading, selectCartError } from '../../store/cart/cartSlice';
 import { checkout } from '../../store/cart/cartActions';
-import { AddressForm } from '../../components/addressForm/AddressForm';
+import { AddAddressForm } from '../../components/addAddressForm/AddAddressForm';
+import { PickAddressForm } from '../../components/pickAddressForm/PickAddressForm';
 
 
 export const CheckoutPage = () => {
@@ -68,7 +69,8 @@ export const CheckoutPage = () => {
         return (
             <div className='col-12'>
                 <h1>Add Address Info</h1>
-                <AddressForm setAddressId={setAddressId}/>
+                <AddAddressForm setAddressId={setAddressId}/>
+                <PickAddressForm setAddressId={setAddressId}/>
             </div>
         );
     };
@@ -78,6 +80,7 @@ export const CheckoutPage = () => {
 
             <h1>Checkout</h1>
             <h2>Total Price: {totalPrice()}</h2>
+            <h2>Address ID: {addressId}</h2>
 
             <div className='checkout'>
                 <button 
