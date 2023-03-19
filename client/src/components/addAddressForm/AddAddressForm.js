@@ -173,7 +173,11 @@ export const AddAddressForm = (props) => {
                     />
                 </section>
 
-                <input type='submit' value='Submit' />
+                <input 
+                    className='btn btn-secondary'
+                    type='submit' 
+                    value='Submit' 
+                />
             </form>
         </div>
     );

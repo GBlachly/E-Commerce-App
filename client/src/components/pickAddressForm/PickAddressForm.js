@@ -2,6 +2,7 @@ import './PickAddressForm.css';
 import React, { useState, useEffect } from 'react';
 
 import addressesApi from '../../api/addressesApi';
+import { AddressCard } from '../addressCard/AddressCard';
 
 
 export const PickAddressForm = (props) => {
@@ -71,22 +72,18 @@ export const PickAddressForm = (props) => {
                                 value={address.id}
                             />
                             <label for='saved-user-addresses' className='d-flex justify-content-around' >
-                                <h2>Address {index + 1}</h2>
-                                <p>{address.id}</p>
-                                {address.name && <p>{address.name}</p>}
-                                <p>{address.line1}</p>
-                                {address.line2 && <p>{address.line2}</p>}
-                                <p>{address.city}</p>
-                                {address.state && <p>{address.state}</p>}
-                                <p>{address.country}</p>
-                                <p>{address.zipCode}</p>
+                                <AddressCard addressId={address.id}/>
                             </label>
                                 
                         </section>
                     );
                 })}
 
-                <input type='submit' value='Submit' />
+                <input 
+                    className='btn btn-secondary'
+                    type='submit' 
+                    value='Submit' 
+                />
             </form>
 
         </div>

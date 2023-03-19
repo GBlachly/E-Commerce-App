@@ -8,6 +8,7 @@ import { selectCart, selectCartLoading, selectCartError } from '../../store/cart
 import { checkout } from '../../store/cart/cartActions';
 import { AddAddressForm } from '../../components/addAddressForm/AddAddressForm';
 import { PickAddressForm } from '../../components/pickAddressForm/PickAddressForm';
+import { AddressCard } from '../../components/addressCard/AddressCard';
 
 
 export const CheckoutPage = () => {
@@ -80,10 +81,14 @@ export const CheckoutPage = () => {
 
             <h1>Checkout</h1>
             <h2>Total Price: {totalPrice()}</h2>
-            <h2>Address ID: {addressId}</h2>
+
+            <div className=''>
+                <AddressCard addressId={addressId}/>
+            </div>
 
             <div className='checkout'>
                 <button 
+                className='btn btn-danger'
                     onClick={ ()=>{
 
                         dispatch(checkout({
@@ -94,6 +99,13 @@ export const CheckoutPage = () => {
                         setAddressId(null);
                     } }
                 >Checkout!!!</button>
+            </div>
+
+            <div className='mt-3'>
+                <button
+                    className='btn btn-secondary'
+                    onClick={ () => setAddressId(null) }
+                >Go Back</button>
             </div>
 
         </div>
