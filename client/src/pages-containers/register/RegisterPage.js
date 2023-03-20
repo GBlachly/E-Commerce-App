@@ -56,7 +56,7 @@ export const RegisterPage = () => {
             {hasError.registerErr && <h3>Username or Email Already Exists</h3>}
             
             <div className='row'>
-                <div className='register col-11 col-lg-4 mx-auto py-3 rounded'>
+                <div className='col-11 col-lg-4 mx-auto py-3 rounded' id='register'>
                     <form onSubmit={handleSubmit} >
                         <section>
                             <label 
@@ -111,10 +111,11 @@ export const RegisterPage = () => {
             <h4 className='mt-1'>Or Register Using...</h4>
 
             <div className='row mb-3'>
-                <div className=' col-3 col-lg-4'></div>
-                <button 
+                <div className='col-3 col-lg-4'></div>
+                <a 
+                    href='http://localhost:4001/api/auth/facebook' 
                     className='col-3 col-lg-2 btn btn-secondary border-light'
-                >Facebook</button>
+                >Facebook</a>
 
                 <button 
                     className='col-3 col-lg-2 btn btn-secondary border-light'

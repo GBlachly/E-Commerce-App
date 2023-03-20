@@ -16,13 +16,13 @@ passport-local
 pg
 validator
 
+passport-facebook
+#https://developers.facebook.com/apps
+#https://developers.facebook.com/docs/graph-api/reference/v2.5/user
+
 
 //NOT INSTALLED
 uuid
 helmet
 csurf //npmjs.com says this package is depreciated
 passport-google ???
-
-passport-facebook
-#https://developers.facebook.com/apps
-#https://developers.facebook.com/docs/graph-api/reference/v2.5/user

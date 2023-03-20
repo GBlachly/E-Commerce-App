@@ -23,6 +23,16 @@ export const AccountPage = () => {
     const [ userCartHasItems, setUserCartHasItems ] = useState(true);
     
 
+    //AS STATED ON THE LOGIN PAGE...
+    //Facebook callback will redirect to login page. Login with facebook will add
+    //user info the server but not the client.
+    //useEffect() on Login page will check to see if session data has stored the user info, 
+    //and if so will load the user info into the react store and Navigate to account.
+    //The Account page however will not load the "replace prompt cart" even if the user added
+    //items to their cart before login. The cart instead will be loaded with their 
+    //previous cart info (even if it was previously empty)
+
+
     //CHECK IF USER'S PREVIOUS CART IS EMPTY
     useEffect(() => {
         if (loggedIn && guestCart) {

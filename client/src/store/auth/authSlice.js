@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { registerUser, loginUser, logoutUser } from './authActions';
+import { registerUser, loginUser, checkLogin, logoutUser } from './authActions';
 
 
 const options = {
@@ -59,6 +59,32 @@ const options = {
             state.loggedIn = false;
             state.isLoading = false;
             state.hasError = { registerErr: false, loginErr: true };
+        },
+
+        //CHECK IF USER LOGGED IN ACTION STATES
+        [checkLogin.pending]: (state, action) => {
+            state.loggedIn = false;
+            state.isLoading = true;
+            state.hasError = { registerErr: false, loginErr: false };
+        },
+        [checkLogin.fulfilled]: (state, action) => {
+            if (!action.payload) {
+                state.user = {};
+                state.loggedIn = false;
+                state.isLoading = false;
+                state.hasError = { registerErr: false, loginErr: false };
+                return;
+            };
+            
+            state.user = action.payload;
+            state.loggedIn = true;
+            state.isLoading = false;
+            state.hasError = { registerErr: false, loginErr: false };
+        },
+        [checkLogin.rejected]: (state, action) => {
+            state.loggedIn = false;
+            state.isLoading = false;
+            state.hasError = { registerErr: false, loginErr: false };   //???
         },
 
         //LOGOUT ACTION STATES

@@ -13,5 +13,13 @@ authRouter.post('/login', passport.authenticate('local'), authService.login);
 
 authRouter.get('/loggedIn', authService.loggedIn);
 
+//FACEBOOK OAUTH ROUTES
+authRouter.get('/facebook', passport.authenticate('facebook'));
+
+authRouter.get('/facebook/callback', passport.authenticate('facebook', {
+    successRedirect: 'http://localhost:3000/login',
+    failureRedirect: 'http://localhost:3000/login'
+}));
+
 
 module.exports = authRouter;

@@ -12,13 +12,11 @@ const userMod = {
             const existingEmail = await this.getByEmail(email);
             
             if ( existingUsername ) { 
-                const err = new Error('Username already exists');
-                throw err;
+                throw new Error('Username already exists');
             };
 
             if ( existingEmail ) { 
-                const err = new Error('Email already exists');
-                throw err; 
+                throw new Error('Email already exists');
             };
 
             const statement = `INSERT INTO users (username, password, email, admin)
@@ -171,6 +169,59 @@ const userMod = {
                                 WHERE id = $1
                                 RETURNING *;`;
             const values = [id];
+            const result = await db.queryNoCB(statement, values);
+        
+            if (result.rows?.length) {
+                return result.rows[0];
+            };
+        
+            return null;
+
+        } catch(err) {
+            throw new Error(err);
+        };
+    },
+
+    //FACEBOOK CREATE/READ
+    async getByFacebookId(facebookId) {
+        try {
+
+            const statement = `SELECT * FROM users 
+                                WHERE facebook_id = $1;`;
+            const values = [facebookId];
+            const result = await db.queryNoCB(statement, values);
+
+            if (result.rows?.length) {
+                return result.rows[0];
+            };
+
+            return null;
+
+        } catch(err) {
+            throw new Error(err);
+        };
+    },
+
+    async createWithFacebook(data) {
+        try {
+
+            const { displayName, email, facebookId } = data;
+
+            const existingUsername = await this.getByUsername(displayName);
+            const existingEmail = await this.getByEmail(email);
+            
+            if ( existingUsername ) { 
+                throw new Error('Username already exists');
+            };
+
+            if ( existingEmail ) { 
+                throw new Error('Email already exists');
+            };
+
+            const statement = `INSERT INTO users (username, email, facebook_id)
+                                VALUES ($1, $2, $3) 
+                                RETURNING *;`;
+            const values = [displayName, email, facebookId];
             const result = await db.queryNoCB(statement, values);
         
             if (result.rows?.length) {

@@ -27,7 +27,13 @@ export const loginUser = createAsyncThunk(
     }
 );
 
-//export const checkUserLogin = createAsyncThunk();
+export const checkLogin = createAsyncThunk(
+    'auth/checkLogin',
+    async () => {
+        const response = await authApi.loggedIn();
+        return response;
+    }
+);
 
 export const logoutUser = createAsyncThunk(
     'auth/logoutUser',
