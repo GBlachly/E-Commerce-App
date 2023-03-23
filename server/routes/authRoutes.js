@@ -13,10 +13,20 @@ authRouter.post('/login', passport.authenticate('local'), authService.login);
 
 authRouter.get('/loggedIn', authService.loggedIn);
 
+
 //FACEBOOK OAUTH ROUTES
 authRouter.get('/facebook', passport.authenticate('facebook'));
 
 authRouter.get('/facebook/callback', passport.authenticate('facebook', {
+    successRedirect: 'http://localhost:3000/login',
+    failureRedirect: 'http://localhost:3000/login'
+}));
+
+
+//GOOGLE OAUTH ROUTES
+authRouter.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+authRouter.get('/google/callback', passport.authenticate('google', {
     successRedirect: 'http://localhost:3000/login',
     failureRedirect: 'http://localhost:3000/login'
 }));

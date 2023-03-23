@@ -103,14 +103,17 @@ export const LoginPage = () => {
 
             <div className='row mb-3'>
                 <div className=' col-3 col-lg-4'></div>
+                
                 <a 
                     href='http://localhost:4001/api/auth/facebook' 
                     className='col-3 col-lg-2 btn btn-secondary border-light'
                 >Facebook</a>
 
-                <button 
+                <a 
+                    href='http://localhost:4001/api/auth/google' 
                     className='col-3 col-lg-2 btn btn-secondary border-light'
-                >Google</button>
+                >Google</a>
+
                 <div className='col-3 col-lg-4'></div>
             </div>
 

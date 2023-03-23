@@ -5,8 +5,8 @@ const cartsMod = require('../models/cartsModel');
 
 
 const facebookStrategy = new FacebookStrategy({
-    clientID: process.env.FACEBOOK_APP_ID,
-    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    clientID: process.env.FACEBOOK_CLIENT_ID,
+    clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
     callbackURL: 'http://localhost:4001/api/auth/facebook/callback',
     profileFields: ['id', 'displayName', 'email']
 }, async (accessToken, refreshToken, profile, cb) => {
@@ -19,9 +19,10 @@ const facebookStrategy = new FacebookStrategy({
 
         if (!user) {
             const newUser = await userMod.createWithFacebook({
-                displayName: profile.displayName,
-                email: 'Access Restricted Currently',
-                facebookId: profile.id
+                facebookId: profile.id,
+                //username: profile.displayName, (DONT KNOW IF I WANT TO AUTO SET USERNAME TO DISPLAYNAME)
+                //email: profile.email || null,  (NEED FACEBOOK TO VERIFY APP)
+                //MAY JUST WANT TO HAVE USER ADD USERNAME/EMAIL AFTERWARDS
             });
 
             if (!newUser) return cb(null, false);

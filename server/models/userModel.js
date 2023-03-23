@@ -205,23 +205,12 @@ const userMod = {
     async createWithFacebook(data) {
         try {
 
-            const { displayName, email, facebookId } = data;
+            const { facebookId } = data;
 
-            const existingUsername = await this.getByUsername(displayName);
-            const existingEmail = await this.getByEmail(email);
-            
-            if ( existingUsername ) { 
-                throw new Error('Username already exists');
-            };
-
-            if ( existingEmail ) { 
-                throw new Error('Email already exists');
-            };
-
-            const statement = `INSERT INTO users (username, email, facebook_id)
-                                VALUES ($1, $2, $3) 
+            const statement = `INSERT INTO users (facebook_id)
+                                VALUES ($1) 
                                 RETURNING *;`;
-            const values = [displayName, email, facebookId];
+            const values = [facebookId];
             const result = await db.queryNoCB(statement, values);
         
             if (result.rows?.length) {
@@ -234,6 +223,48 @@ const userMod = {
             throw new Error(err);
         };
     },
+
+        //GOOGLE CREATE/READ
+        async getByGoogleId(googleId) {
+            try {
+    
+                const statement = `SELECT * FROM users 
+                                    WHERE google_id = $1;`;
+                const values = [googleId];
+                const result = await db.queryNoCB(statement, values);
+    
+                if (result.rows?.length) {
+                    return result.rows[0];
+                };
+    
+                return null;
+    
+            } catch(err) {
+                throw new Error(err);
+            };
+        },
+    
+        async createWithGoogle(data) {
+            try {
+    
+                const { googleId } = data;
+
+                const statement = `INSERT INTO users (google_id)
+                                    VALUES ($1) 
+                                    RETURNING *;`;
+                const values = [googleId];
+                const result = await db.queryNoCB(statement, values);
+            
+                if (result.rows?.length) {
+                    return result.rows[0];
+                };
+            
+                return null;
+    
+            } catch(err) {
+                throw new Error(err);
+            };
+        },
 };
 
 

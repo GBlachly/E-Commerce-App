@@ -6,9 +6,9 @@ CREATE TABLE users (
     password TEXT,
     email VARCHAR(50) UNIQUE,
     admin BOOL DEFAULT FALSE,
-    facebook_id VARCHAR
+    facebook_id VARCHAR,
+    google_id VARCHAR
 );
---not sure what data type to use for facebook/ how to set up FB data
 
 
 CREATE TABLE products (

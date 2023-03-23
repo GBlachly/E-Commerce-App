@@ -10,6 +10,7 @@ const session = require('express-session');
 const passport = require('passport');
 const localStrategy = require('./server/passport/localStrategy');
 const facebookStrategy = require('./server/passport/facebookStrategy');
+const googleStrategy = require('./server/passport/googleStrategy');
 
 const db = require('./server/db/db');
 //const userMod = require('./server/models/userModel'); 
@@ -82,6 +83,7 @@ passport.deserializeUser((id, done) => {
 
 passport.use('local', localStrategy);
 passport.use('facebook', facebookStrategy);
+passport.use('google', googleStrategy);
 
 
 //ROUTES
