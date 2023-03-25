@@ -22,13 +22,13 @@ export const HomePage = () => {
     return (
         <div className='col-12'>
 
-            <div className='banner'>
-                <div className='title-card'>
+            <div className='' id='banner'>
+                <div className='' id='title-card'>
                     <h1>Welcome to the Wide World of Items</h1>
                 </div>
             </div>
 
-            <div className='about mx-3 my-2'>
+            <div className='mx-3 my-2' id='about'>
                 <h2>About</h2>
 
                 <img 

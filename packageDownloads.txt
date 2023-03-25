@@ -3,6 +3,8 @@ redux
 react-redux
 @reduxjs/toolkit
 react-router-dom
+@stripe/react-stripe-js 
+@stripe/stripe-js
 
 express
 express-session
@@ -13,16 +15,13 @@ bcrypt
 dotenv
 passport
 passport-local
+passport-facebook
+passport-google-oauth20
 pg
 validator
-
-passport-facebook
-#https://developers.facebook.com/apps
-#https://developers.facebook.com/docs/graph-api/reference/v2.5/user
 
 
 //NOT INSTALLED
 uuid
 helmet
 csurf //npmjs.com says this package is depreciated
-passport-google ???
