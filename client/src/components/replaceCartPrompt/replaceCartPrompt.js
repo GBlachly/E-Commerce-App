@@ -1,4 +1,4 @@
-import './replaceCartPrompt.css';
+import './ReplaceCartPrompt.css';
 import React from 'react'; 
 
 

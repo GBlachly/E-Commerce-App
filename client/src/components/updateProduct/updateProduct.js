@@ -1,4 +1,4 @@
-import './updateProduct.css';
+import './UpdateProduct.css';
 import React, { useState } from 'react';
 
 import productsApi from '../../api/productsApi';

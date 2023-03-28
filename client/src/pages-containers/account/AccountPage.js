@@ -8,7 +8,7 @@ import { selectUser, selectAuthError, selectLoggedIn } from '../../store/auth/au
 import { logoutUser } from '../../store/auth/authActions';
 import { selectCart, selectGuestCart, selectCartLoading, logoutCart } from '../../store/cart/cartSlice';
 import { loadUserCart, replaceCartItems } from '../../store/cart/cartActions';
-import { ReplaceCartPrompt } from '../../components/replaceCartPrompt/replaceCartPrompt';
+import { ReplaceCartPrompt } from '../../components/replaceCartPrompt/ReplaceCartPrompt';
 
 
 export const AccountPage = () => {

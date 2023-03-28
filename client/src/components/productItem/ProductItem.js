@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 export const ProductItem = (props) => {
-    const { id, name, price, url } = props.product;
+    const { /*id,*/ name, price, url } = props.product;
     const { index } = props;
 
     return (

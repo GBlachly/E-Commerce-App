@@ -1,8 +1,8 @@
-import './updateOrders.css';
+import './UpdateOrders.css';
 import React, { useState } from 'react';
 
 import ordersApi from '../../api/ordersApi';
-import { UpdateOrder } from '../../components/updateOrder/updateOrder';
+import { UpdateOrder } from '../updateOrder/UpdateOrder';
 
 
 export const UpdateOrders = () => {

@@ -35,14 +35,27 @@ body {
 
 /* NAV COMPONENTS FOR HEADER AND FOOTER   NAV COMPONENTS FOR HEADER AND FOOTER */
 
-/* .nav {
-    justify-content: center;
-} */
-
 .nav-link {
   color: var(--tertiary-color);
 }
 
 .nav-link:hover {
   color: white;
+}
+
+
+/* MEDIA      MEDIA     MEDIA     MEDIA     MEDIA      MEDIA     MEDIA     MEDIA */
+
+@media only screen and (min-width: 480px) and (max-width: 768px)  {
+  #header {
+    font-size: .8rem;
+  }
+
+  .nav {
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+
 }

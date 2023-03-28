@@ -1,6 +1,7 @@
 import './CartPage.css';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { selectLoggedIn } from '../../store/auth/authSlice';
 import { loadAllProducts } from '../../store/products/productsActions';
@@ -51,8 +52,7 @@ export const CartPage = () => {
     };
 
 
-
-
+    //RENDERS 
     if (isLoading) {
         return (
             <div className='col-12 mt-3'>
@@ -84,11 +84,17 @@ export const CartPage = () => {
             <h2>Cart Id: {cart.id && cart.id}</h2>
             <h3>User Id: {cart.userId && cart.userId}</h3>
             <h3>Total Price: {`$${totalPrice()}`}</h3>
+            
             <button 
-                className='btn btn-danger'
+                className='btn btn-danger mr-2'
                 onClick={handleCartClear}
             >Clear Cart</button>
-            
+
+            <Link 
+                to='/checkout' 
+                className='btn btn-success ml-2'
+            >Checkout</Link>
+
             
             {cart.products.map(product => {
                 return (
