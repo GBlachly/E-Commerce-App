@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { selectLoggedIn, selectUser } from '../../store/auth/authSlice';
-import { UpdateProduct } from '../../components/updateProduct/UpdateProduct';
-import { UpdateOrders } from '../../components/updateOrders/UpdateOrders';
+import { UpdateProduct } from '../../components/updateProduct/Update-Product';
+import { UpdateOrders } from '../../components/updateOrders/Update-Orders';
 
 
 export const AdminPage = () => {
