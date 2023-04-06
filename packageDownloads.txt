@@ -5,6 +5,7 @@ react-redux
 react-router-dom
 @stripe/react-stripe-js 
 @stripe/stripe-js
+react-stripe-checkout   /*https://www.npmjs.com/package/react-stripe-checkout*/
 
 express
 express-session
